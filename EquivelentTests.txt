@@ -1,3 +1,10 @@
 Line number	Equivelancy
 44			0
 63			0
+
+321			0
+323			changed boundary: 0 ; replaced sub with add: 0
+325			changed boundary: 1 ; replaced sub with add: 0 ; negated conditional: 0
+342			0
+345			1
+398			0
