@@ -1,0 +1,1355 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>TaxCalculatorTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TaxCalculatorTest (Mar 25, 2015 11:30:47 PM)</a> &gt; <a href="../../index.html" class="el_group">CodeCoverageA</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">edu.msoe.se2832.taxRateCalculator.wschilling</a> &gt; <span class="el_source">TaxCalculatorTest.java</span></div><h1>TaxCalculatorTest.java</h1><pre class="source lang-java linenums">package edu.msoe.se2832.taxRateCalculator.wschilling;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+import edu.msoe.se2832.taxRateCalculator.wschilling.TaxCalculator;
+import edu.msoe.se2832.taxRateCalculator.wschilling.TaxCalculatorInterface;
+import junit.framework.TestCase;
+
+<span class="fc" id="L12">public class TaxCalculatorTest extends TestCase {</span>
+	// The following variables are instances used for testing tax calculations.
+	TaxCalculatorInterface t;
+	TaxCalculatorInterface t1;
+	TaxCalculatorInterface t2;
+
+	@Before
+	/**
+	 * This method will setup a new setup that can be used by other tests.
+	 */
+	public void setUp() throws Exception {
+<span class="fc" id="L23">		t = new TaxCalculator(&quot;John Smith&quot;,</span>
+<span class="fc" id="L24">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 42);</span>
+<span class="fc" id="L25">	}</span>
+
+	@After
+	/**
+	 * This method will cleanup after testing is done.
+	 */
+	public void tearDown() {
+
+<span class="fc" id="L33">	}</span>
+
+	@Test
+	/**
+	 * This test will verify a return of married filing separately when the spouse is under the age of 65. 
+	 * @throws Exception Exceptions will occur if there is a calculation problem.
+	 */
+	public void testTaxCalculationMarriedFilingSeparatelyAge31()
+			throws Exception {
+<span class="fc" id="L42">		t1 = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L43">				TaxCalculatorInterface.MARRIED_FILING_SEPARATELY, 31, 25);</span>
+<span class="fc" id="L44">		t1.setGrossIncome(5450);</span>
+<span class="fc" id="L45">		assertEquals(0, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L46">		t1.setGrossIncome(13474);</span>
+<span class="fc" id="L47">		assertEquals(802.4, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L48">		t1.setGrossIncome(13475);</span>
+<span class="fc" id="L49">		assertEquals(802.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L50">		t1.setGrossIncome(13476);</span>
+<span class="fc" id="L51">		assertEquals(802.65, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L52">		t1.setGrossIncome(37999);</span>
+<span class="fc" id="L53">		assertEquals(4481.1, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L54">		t1.setGrossIncome(38000);</span>
+<span class="fc" id="L55">		assertEquals(4481.25, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L56">		t1.setGrossIncome(38001);</span>
+<span class="fc" id="L57">		assertEquals(4481.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L58">		t1.setGrossIncome(71174);</span>
+<span class="fc" id="L59">		assertEquals(12774.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L60">		t1.setGrossIncome(71175);</span>
+<span class="fc" id="L61">		assertEquals(12775, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L62">		t1.setGrossIncome(71176);</span>
+<span class="fc" id="L63">		assertEquals(12775.28, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L64">		t1.setGrossIncome(105599);</span>
+<span class="fc" id="L65">		assertEquals(22413.72, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L66">		t1.setGrossIncome(105600);</span>
+<span class="fc" id="L67">		assertEquals(22414, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L68">		t1.setGrossIncome(105601);</span>
+<span class="fc" id="L69">		assertEquals(22414.33, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L70">		t1.setGrossIncome(184299);</span>
+<span class="fc" id="L71">		assertEquals(48384.67, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L72">		t1.setGrossIncome(184300);</span>
+<span class="fc" id="L73">		assertEquals(48385, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L74">		t1.setGrossIncome(184301);</span>
+<span class="fc" id="L75">		assertEquals(48385.35, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L76">		t1.setGrossIncome(205449);</span>
+<span class="fc" id="L77">		assertEquals(55787.15, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L78">		t1.setGrossIncome(205450);</span>
+<span class="fc" id="L79">		assertEquals(55787.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L80">	}</span>
+
+	@Test
+	/**
+	 * This test will verify a return of married filing separately when the spouse is under the age of 65. 
+	 * @throws Exception Exceptions will occur if there is a calculation problem.
+	 */
+	public void testTaxCalculationMarriedFilingSeparatelyAge65()
+			throws Exception {
+<span class="fc" id="L89">		t2 = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L90">				TaxCalculatorInterface.MARRIED_FILING_SEPARATELY, 65, 25);</span>
+<span class="fc" id="L91">		t2.setGrossIncome(6500);</span>
+<span class="fc" id="L92">		assertEquals(0, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L93">		t2.setGrossIncome(14524);</span>
+<span class="fc" id="L94">		assertEquals(802.4, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L95">		t2.setGrossIncome(14525);</span>
+<span class="fc" id="L96">		assertEquals(802.5, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L97">		t2.setGrossIncome(14526);</span>
+<span class="fc" id="L98">		assertEquals(802.65, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L99">		t2.setGrossIncome(39049);</span>
+<span class="fc" id="L100">		assertEquals(4481.1, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L101">		t2.setGrossIncome(39050);</span>
+<span class="fc" id="L102">		assertEquals(4481.25, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L103">		t2.setGrossIncome(39051);</span>
+<span class="fc" id="L104">		assertEquals(4481.5, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L105">		t2.setGrossIncome(72224);</span>
+<span class="fc" id="L106">		assertEquals(12774.75, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L107">		t2.setGrossIncome(72225);</span>
+<span class="fc" id="L108">		assertEquals(12775, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L109">		t2.setGrossIncome(72226);</span>
+<span class="fc" id="L110">		assertEquals(12775.28, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L111">		t2.setGrossIncome(106649);</span>
+<span class="fc" id="L112">		assertEquals(22413.72, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L113">		t2.setGrossIncome(106650);</span>
+<span class="fc" id="L114">		assertEquals(22414, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L115">		t2.setGrossIncome(106651);</span>
+<span class="fc" id="L116">		assertEquals(22414.33, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L117">		t2.setGrossIncome(185349);</span>
+<span class="fc" id="L118">		assertEquals(48384.67, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L119">		t2.setGrossIncome(185350);</span>
+<span class="fc" id="L120">		assertEquals(48385, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L121">		t2.setGrossIncome(185351);</span>
+<span class="fc" id="L122">		assertEquals(48385.35, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L123">		t2.setGrossIncome(206499);</span>
+<span class="fc" id="L124">		assertEquals(55787.15, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L125">		t2.setGrossIncome(206500);</span>
+<span class="fc" id="L126">		assertEquals(55787.5, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L127">	}</span>
+
+	@Test
+	/**
+	 * This method will test the head of household if the head of household is age 65.
+	 * @throws Exception
+	 */
+	public void testTaxCalculationHeadOfHouseholdAge65() throws Exception {
+<span class="fc" id="L135">		t2 = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L136">				TaxCalculatorInterface.HEAD_OF_HOUSEHOLD, 65);</span>
+<span class="fc" id="L137">		t2.setGrossIncome(9050);</span>
+<span class="fc" id="L138">		assertEquals(0, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L139">		t2.setGrossIncome(20499);</span>
+<span class="fc" id="L140">		assertEquals(1144.9, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L141">		t2.setGrossIncome(20500);</span>
+<span class="fc" id="L142">		assertEquals(1145, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L143">		t2.setGrossIncome(20501);</span>
+<span class="fc" id="L144">		assertEquals(1145.15, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L145">		t2.setGrossIncome(52699);</span>
+<span class="fc" id="L146">		assertEquals(5974.85, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L147">		t2.setGrossIncome(52700);</span>
+<span class="fc" id="L148">		assertEquals(5975, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L149">		t2.setGrossIncome(52701);</span>
+<span class="fc" id="L150">		assertEquals(5975.25, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L151">		t2.setGrossIncome(121699);</span>
+<span class="fc" id="L152">		assertEquals(23224.75, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L153">		t2.setGrossIncome(121700);</span>
+<span class="fc" id="L154">		assertEquals(23225, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L155">		t2.setGrossIncome(121701);</span>
+<span class="fc" id="L156">		assertEquals(23225.28, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L157">		t2.setGrossIncome(191449);</span>
+<span class="fc" id="L158">		assertEquals(42754.72, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L159">		t2.setGrossIncome(191450);</span>
+<span class="fc" id="L160">		assertEquals(42755, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L161">		t2.setGrossIncome(191451);</span>
+<span class="fc" id="L162">		assertEquals(42755.33, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L163">		t2.setGrossIncome(366749);</span>
+<span class="fc" id="L164">		assertEquals(100603.67, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L165">		t2.setGrossIncome(366750);</span>
+<span class="fc" id="L166">		assertEquals(100604, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L167">		t2.setGrossIncome(366751);</span>
+<span class="fc" id="L168">		assertEquals(100604.35, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L169">		t2.setGrossIncome(409049);</span>
+<span class="fc" id="L170">		assertEquals(115408.65, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L171">		t2.setGrossIncome(409050);</span>
+<span class="fc" id="L172">		assertEquals(115409, t2.getTaxDue(), 0.01);</span>
+<span class="fc" id="L173">	}</span>
+
+	/**
+	 * This method will test the head of household if the head of household is
+	 * age 31.
+	 * 
+	 * @throws Exception
+	 */
+	public void testTaxCalculationHeadOfHouseholdAge31() throws Exception {
+<span class="fc" id="L182">		t1 = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L183">				TaxCalculatorInterface.HEAD_OF_HOUSEHOLD, 31);</span>
+<span class="fc" id="L184">		t1.setGrossIncome(8000);</span>
+<span class="fc" id="L185">		assertEquals(0, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L186">		t1.setGrossIncome(19449);</span>
+<span class="fc" id="L187">		assertEquals(1144.9, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L188">		t1.setGrossIncome(19450);</span>
+<span class="fc" id="L189">		assertEquals(1145, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L190">		t1.setGrossIncome(19451);</span>
+<span class="fc" id="L191">		assertEquals(1145.15, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L192">		t1.setGrossIncome(51649);</span>
+<span class="fc" id="L193">		assertEquals(5974.85, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L194">		t1.setGrossIncome(51650);</span>
+<span class="fc" id="L195">		assertEquals(5975, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L196">		t1.setGrossIncome(51651);</span>
+<span class="fc" id="L197">		assertEquals(5975.25, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L198">		t1.setGrossIncome(120649);</span>
+<span class="fc" id="L199">		assertEquals(23224.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L200">		t1.setGrossIncome(120650);</span>
+<span class="fc" id="L201">		assertEquals(23225, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L202">		t1.setGrossIncome(120651);</span>
+<span class="fc" id="L203">		assertEquals(23225.28, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L204">		t1.setGrossIncome(190399);</span>
+<span class="fc" id="L205">		assertEquals(42754.72, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L206">		t1.setGrossIncome(190400);</span>
+<span class="fc" id="L207">		assertEquals(42755, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L208">		t1.setGrossIncome(190401);</span>
+<span class="fc" id="L209">		assertEquals(42755.33, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L210">		t1.setGrossIncome(365699);</span>
+<span class="fc" id="L211">		assertEquals(100603.67, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L212">		t1.setGrossIncome(365700);</span>
+<span class="fc" id="L213">		assertEquals(100604, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L214">		t1.setGrossIncome(365701);</span>
+<span class="fc" id="L215">		assertEquals(100604.35, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L216">		t1.setGrossIncome(407999);</span>
+<span class="fc" id="L217">		assertEquals(115408.65, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L218">		t1.setGrossIncome(408000);</span>
+<span class="fc" id="L219">		assertEquals(115409, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L220">	}</span>
+
+	@Test
+	public void testTaxCalculationMarriedFilingJointly() throws Exception {
+		TaxCalculatorInterface t1;
+		TaxCalculatorInterface t2;
+
+<span class="fc" id="L227">		t1 = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L228">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 31, 31);</span>
+<span class="fc" id="L229">		t2 = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L230">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 65, 65);</span>
+<span class="fc" id="L231">		t1.setGrossIncome(10900);</span>
+<span class="fc" id="L232">		t2.setGrossIncome(13000);</span>
+<span class="fc" id="L233">		assertEquals(0, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L234">		t1.setGrossIncome(26949);</span>
+<span class="fc" id="L235">		t2.setGrossIncome(29049);</span>
+<span class="fc" id="L236">		assertEquals(1604.9, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L237">		t1.setGrossIncome(26950);</span>
+<span class="fc" id="L238">		t2.setGrossIncome(29050);</span>
+<span class="fc" id="L239">		assertEquals(1605, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L240">		t1.setGrossIncome(26951);</span>
+<span class="fc" id="L241">		t2.setGrossIncome(29051);</span>
+<span class="fc" id="L242">		assertEquals(1605.15, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L243">		t1.setGrossIncome(75999);</span>
+<span class="fc" id="L244">		t2.setGrossIncome(78099);</span>
+<span class="fc" id="L245">		assertEquals(8962.35, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L246">		t1.setGrossIncome(76000);</span>
+<span class="fc" id="L247">		t2.setGrossIncome(78100);</span>
+<span class="fc" id="L248">		assertEquals(8962.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L249">		t1.setGrossIncome(76001);</span>
+<span class="fc" id="L250">		t2.setGrossIncome(78101);</span>
+<span class="fc" id="L251">		assertEquals(8962.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L252">		t1.setGrossIncome(142349);</span>
+<span class="fc" id="L253">		t2.setGrossIncome(144449);</span>
+<span class="fc" id="L254">		assertEquals(25549.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L255">		t1.setGrossIncome(142350);</span>
+<span class="fc" id="L256">		t2.setGrossIncome(144450);</span>
+<span class="fc" id="L257">		assertEquals(25550, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L258">		t1.setGrossIncome(142351);</span>
+<span class="fc" id="L259">		t2.setGrossIncome(144451);</span>
+<span class="fc" id="L260">		assertEquals(25550.28, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L261">		t1.setGrossIncome(211199);</span>
+<span class="fc" id="L262">		t2.setGrossIncome(213299);</span>
+<span class="fc" id="L263">		assertEquals(44827.72, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L264">		t1.setGrossIncome(211200);</span>
+<span class="fc" id="L265">		t2.setGrossIncome(213300);</span>
+<span class="fc" id="L266">		assertEquals(44828, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L267">		t1.setGrossIncome(211201);</span>
+<span class="fc" id="L268">		t2.setGrossIncome(213301);</span>
+<span class="fc" id="L269">		assertEquals(44828.33, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L270">		t1.setGrossIncome(368599);</span>
+<span class="fc" id="L271">		t2.setGrossIncome(370699);</span>
+<span class="fc" id="L272">		assertEquals(96769.67, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L273">		t1.setGrossIncome(368600);</span>
+<span class="fc" id="L274">		t2.setGrossIncome(370700);</span>
+<span class="fc" id="L275">		assertEquals(96770, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L276">		t1.setGrossIncome(368601);</span>
+<span class="fc" id="L277">		t2.setGrossIncome(370701);</span>
+<span class="fc" id="L278">		assertEquals(96770.35, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L279">		t1.setGrossIncome(410899);</span>
+<span class="fc" id="L280">		t2.setGrossIncome(412999);</span>
+<span class="fc" id="L281">		assertEquals(111574.65, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L282">		t1.setGrossIncome(410900);</span>
+<span class="fc" id="L283">		t2.setGrossIncome(413000);</span>
+<span class="fc" id="L284">		assertEquals(111575, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L285">	}</span>
+
+	public void testTaxCalculationMarriedFilingJointlyAge31() throws Exception {
+		TaxCalculatorInterface t1;
+
+<span class="fc" id="L290">		t1 = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L291">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 31, 31);</span>
+<span class="fc" id="L292">		t1.setGrossIncome(10900);</span>
+<span class="fc" id="L293">		assertEquals(0, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L294">		t1.setGrossIncome(26949);</span>
+<span class="fc" id="L295">		assertEquals(1604.9, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L296">		t1.setGrossIncome(26950);</span>
+<span class="fc" id="L297">		assertEquals(1605, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L298">		t1.setGrossIncome(26951);</span>
+<span class="fc" id="L299">		assertEquals(1605.15, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L300">		t1.setGrossIncome(75999);</span>
+<span class="fc" id="L301">		assertEquals(8962.35, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L302">		t1.setGrossIncome(76000);</span>
+<span class="fc" id="L303">		assertEquals(8962.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L304">		t1.setGrossIncome(76001);</span>
+<span class="fc" id="L305">		assertEquals(8962.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L306">		t1.setGrossIncome(142349);</span>
+<span class="fc" id="L307">		assertEquals(25549.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L308">		t1.setGrossIncome(142350);</span>
+<span class="fc" id="L309">		assertEquals(25550, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L310">		t1.setGrossIncome(142351);</span>
+<span class="fc" id="L311">		assertEquals(25550.28, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L312">		t1.setGrossIncome(211199);</span>
+<span class="fc" id="L313">		assertEquals(44827.72, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L314">		t1.setGrossIncome(211200);</span>
+<span class="fc" id="L315">		assertEquals(44828, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L316">		t1.setGrossIncome(211201);</span>
+<span class="fc" id="L317">		assertEquals(44828.33, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L318">		t1.setGrossIncome(368599);</span>
+<span class="fc" id="L319">		assertEquals(96769.67, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L320">		t1.setGrossIncome(368600);</span>
+<span class="fc" id="L321">		assertEquals(96770, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L322">		t1.setGrossIncome(368601);</span>
+<span class="fc" id="L323">		assertEquals(96770.35, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L324">		t1.setGrossIncome(410899);</span>
+<span class="fc" id="L325">		assertEquals(111574.65, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L326">		t1.setGrossIncome(410900);</span>
+<span class="fc" id="L327">		assertEquals(111575, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L328">	}</span>
+
+	@Test
+	/**
+	 * This method will test a single person age 31 filing their tax return.
+	 * @throws Exception
+	 */
+	public void testTaxCalculationSingleAge31() throws Exception {
+		TaxCalculatorInterface t1;
+<span class="fc" id="L337">		t1 = new TaxCalculator(&quot;John Adams&quot;, TaxCalculatorInterface.SINGLE, 31);</span>
+<span class="fc" id="L338">		t1.setGrossIncome(5450);</span>
+<span class="fc" id="L339">		assertEquals(0, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L340">		t1.setGrossIncome(13474);</span>
+<span class="fc" id="L341">		assertEquals(802.4, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L342">		t1.setGrossIncome(13475);</span>
+<span class="fc" id="L343">		assertEquals(802.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L344">		t1.setGrossIncome(13476);</span>
+<span class="fc" id="L345">		assertEquals(802.65, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L346">		t1.setGrossIncome(37999);</span>
+<span class="fc" id="L347">		assertEquals(4481.1, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L348">		t1.setGrossIncome(38000);</span>
+<span class="fc" id="L349">		assertEquals(4481.25, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L350">		t1.setGrossIncome(38001);</span>
+<span class="fc" id="L351">		assertEquals(4481.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L352">		t1.setGrossIncome(84299);</span>
+<span class="fc" id="L353">		assertEquals(16056, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L354">		t1.setGrossIncome(84300);</span>
+<span class="fc" id="L355">		assertEquals(16056.25, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L356">		t1.setGrossIncome(84301);</span>
+<span class="fc" id="L357">		assertEquals(16056.53, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L358">		t1.setGrossIncome(169999);</span>
+<span class="fc" id="L359">		assertEquals(40051.97, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L360">		t1.setGrossIncome(170000);</span>
+<span class="fc" id="L361">		assertEquals(40052.25, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L362">		t1.setGrossIncome(170001);</span>
+<span class="fc" id="L363">		assertEquals(40052.58, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L364">		t1.setGrossIncome(363149);</span>
+<span class="fc" id="L365">		assertEquals(103791.42, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L366">		t1.setGrossIncome(363150);</span>
+<span class="fc" id="L367">		assertEquals(103791.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L368">		t1.setGrossIncome(363151);</span>
+<span class="fc" id="L369">		assertEquals(103792.1, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L370">		t1.setGrossIncome(405449);</span>
+<span class="fc" id="L371">		assertEquals(118596.4, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L372">		t1.setGrossIncome(405450);</span>
+<span class="fc" id="L373">		assertEquals(118596.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L374">	}</span>
+
+	@Test
+	/**
+	 * This method will test a single person at age 20 filing their tax return.
+	 * @throws Exception
+	 */
+	public void testTaxCalculationSingleAge20() throws Exception {
+		TaxCalculatorInterface t1;
+<span class="fc" id="L383">		t1 = new TaxCalculator(&quot;John Adams&quot;, TaxCalculatorInterface.SINGLE, 20);</span>
+<span class="fc" id="L384">		t1.setGrossIncome(5450);</span>
+<span class="fc" id="L385">		assertEquals(0, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L386">		t1.setGrossIncome(13474);</span>
+<span class="fc" id="L387">		assertEquals(802.4, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L388">		t1.setGrossIncome(13475);</span>
+<span class="fc" id="L389">		assertEquals(802.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L390">		t1.setGrossIncome(13476);</span>
+<span class="fc" id="L391">		assertEquals(802.65, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L392">		t1.setGrossIncome(37999);</span>
+<span class="fc" id="L393">		assertEquals(4481.1, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L394">		t1.setGrossIncome(38000);</span>
+<span class="fc" id="L395">		assertEquals(4481.25, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L396">		t1.setGrossIncome(38001);</span>
+<span class="fc" id="L397">		assertEquals(4481.5, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L398">		t1.setGrossIncome(84299);</span>
+<span class="fc" id="L399">		assertEquals(16056, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L400">		t1.setGrossIncome(84300);</span>
+<span class="fc" id="L401">		assertEquals(16056.25, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L402">		t1.setGrossIncome(84301);</span>
+<span class="fc" id="L403">		assertEquals(16056.53, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L404">		t1.setGrossIncome(169999);</span>
+<span class="fc" id="L405">		assertEquals(40051.97, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L406">		t1.setGrossIncome(170000);</span>
+<span class="fc" id="L407">		assertEquals(40052.25, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L408">		t1.setGrossIncome(170001);</span>
+<span class="fc" id="L409">		assertEquals(40052.58, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L410">		t1.setGrossIncome(363149);</span>
+<span class="fc" id="L411">		assertEquals(103791.42, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L412">		t1.setGrossIncome(363150);</span>
+<span class="fc" id="L413">		assertEquals(103791.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L414">		t1.setGrossIncome(363151);</span>
+<span class="fc" id="L415">		assertEquals(103792.1, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L416">		t1.setGrossIncome(405449);</span>
+<span class="fc" id="L417">		assertEquals(118596.4, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L418">		t1.setGrossIncome(405450);</span>
+<span class="fc" id="L419">		assertEquals(118596.75, t1.getTaxDue(), 0.01);</span>
+<span class="fc" id="L420">	}</span>
+
+	/**
+	 * This test will verify that the short form of the constructor works
+	 * properly. In each of these cases, an exception should be thrown by the
+	 * constructor for an invalid combination.
+	 * 
+	 * @throws Exception
+	 *             An exception will be thrown if the main program throws the
+	 *             exception.
+	 */
+	@Test
+	public void testShortConstructorFailures() throws Exception {
+		/* Test the creation of a class of a single. */
+<span class="fc" id="L434">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L435">				TaxCalculatorInterface.QUALIFYING_WIDOWER, 31);</span>
+<span class="fc" id="L436">		assertEquals(31, t.getAge());</span>
+<span class="fc" id="L437">		assertEquals(0, t.getSpouseAge());</span>
+<span class="fc" id="L438">		assertEquals(0.0, t.getGrossIncome());</span>
+
+		try {
+<span class="nc" id="L441">			t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="nc" id="L442">					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 31);</span>
+<span class="nc" id="L443">			fail(&quot;You should not be able to create a class without providing spouse's age.&quot;);</span>
+<span class="pc" id="L444">		} catch (Exception e) {</span>
+			// Exception should be generated here.
+		}
+
+		try {
+<span class="nc" id="L449">			t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="nc" id="L450">					TaxCalculatorInterface.MARRIED_FILING_SEPARATELY, 31);</span>
+<span class="nc" id="L451">			fail(&quot;You should not be able to create a class without providing spouse's age.&quot;);</span>
+<span class="pc" id="L452">		} catch (Exception e) {</span>
+			// Exception should be generated here.
+		}
+<span class="fc" id="L455">	}</span>
+
+	/**
+	 * This test will verify that the short form of the constructor works
+	 * properly. This includes all types of single filing where there is not a
+	 * spouse or a spouse's age.
+	 * 
+	 * @throws Exception
+	 *             An exception will be thrown if the main program throws the
+	 *             exception.
+	 */
+	@Test
+	public void testShortConstructorQualifyingWidower() throws Exception {
+		/* Test the creation of a class of a single. */
+<span class="fc" id="L469">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L470">				TaxCalculatorInterface.QUALIFYING_WIDOWER, 31);</span>
+<span class="fc" id="L471">		assertEquals(31, t.getAge());</span>
+<span class="fc" id="L472">		assertEquals(0, t.getSpouseAge());</span>
+<span class="fc" id="L473">		assertEquals(0.0, t.getGrossIncome());</span>
+<span class="fc" id="L474">	}</span>
+
+	/**
+	 * This test will verify that the short form of the constructor works
+	 * properly. This includes all types of single filing where there is not a
+	 * spouse or a spouse's age.
+	 * 
+	 * @throws Exception
+	 *             An exception will be thrown if the main program throws the
+	 *             exception.
+	 */
+	@Test
+	public void testShortConstructorHeadOfHousehold() throws Exception {
+		/* Test the creation of a class of a single. */
+
+<span class="fc" id="L489">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L490">				TaxCalculatorInterface.HEAD_OF_HOUSEHOLD, 31);</span>
+<span class="fc" id="L491">		assertEquals(31, t.getAge());</span>
+<span class="fc" id="L492">		assertEquals(0, t.getSpouseAge());</span>
+<span class="fc" id="L493">		assertEquals(0.0, t.getGrossIncome());</span>
+
+<span class="fc" id="L495">	}</span>
+
+	/**
+	 * This test will verify that the short form of the constructor works
+	 * properly. This includes all types of single filing where there is not a
+	 * spouse or a spouse's age.
+	 * 
+	 * @throws Exception
+	 *             An exception will be thrown if the main program throws the
+	 *             exception.
+	 */
+	@Test
+	public void testShortConstructorSingle() throws Exception {
+		/* Test the creation of a class of a single. */
+<span class="fc" id="L509">		t = new TaxCalculator(&quot;John Adams&quot;, TaxCalculatorInterface.SINGLE, 31);</span>
+<span class="fc" id="L510">		assertEquals(31, t.getAge());</span>
+<span class="fc" id="L511">		assertEquals(0, t.getSpouseAge());</span>
+<span class="fc" id="L512">		assertEquals(0.0, t.getGrossIncome());</span>
+<span class="fc" id="L513">		assertEquals(TaxCalculatorInterface.SINGLE, t.getFilingStatus());</span>
+
+<span class="fc" id="L515">	}</span>
+
+	/**
+	 * This test will verify that the long form of the constructor works
+	 * properly. This includes all types of single filing where there is not a
+	 * spouse or a spouse's age.
+	 * 
+	 * @throws Exception
+	 *             An exception will be thrown if the main program throws the
+	 *             exception.
+	 */
+	@Test
+	public void testLongConstructorWhichInvalidCombinations() throws Exception {
+		/* Test the creation of a class of a single. */
+		try {
+<span class="nc" id="L530">			t = new TaxCalculator(&quot;John Adams&quot;, TaxCalculatorInterface.SINGLE,</span>
+<span class="nc" id="L531">					31, 23);</span>
+<span class="nc" id="L532">			fail();</span>
+<span class="pc" id="L533">		} catch (Exception e) {</span>
+			// This exception should occur because a single person should have
+			// no spouse.
+		}
+
+		try {
+<span class="nc" id="L539">			t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="nc" id="L540">					TaxCalculatorInterface.HEAD_OF_HOUSEHOLD, 31, 23);</span>
+<span class="nc" id="L541">			fail();</span>
+<span class="pc" id="L542">		} catch (Exception e) {</span>
+			// This exception should occur because a single person should have
+			// no spouse.
+		}
+
+		try {
+<span class="nc" id="L548">			t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="nc" id="L549">					TaxCalculatorInterface.QUALIFYING_WIDOWER, 31, 23);</span>
+<span class="nc" id="L550">			fail();</span>
+<span class="pc" id="L551">		} catch (Exception e) {</span>
+			// This exception should occur because a single person should have
+			// no spouse.
+		}
+
+<span class="fc" id="L556">	}</span>
+
+	/**
+	 * This test will verify that the long form of the constructor works
+	 * properly. This includes all types of single filing where there is not a
+	 * spouse or a spouse's age.
+	 * 
+	 * @throws Exception
+	 *             An exception will be thrown if the main program throws the
+	 *             exception.
+	 */
+	@Test
+	public void testLongConstructorMarriedFilingJointly() throws Exception {
+
+<span class="fc" id="L570">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L571">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 31, 21);</span>
+<span class="fc" id="L572">		assertEquals(31, t.getAge());</span>
+<span class="fc" id="L573">		assertEquals(21, t.getSpouseAge());</span>
+<span class="fc" id="L574">		assertEquals(0.0, t.getGrossIncome());</span>
+
+<span class="fc" id="L576">	}</span>
+
+	/**
+	 * This test will verify that the long form of the constructor works
+	 * properly. This includes all types of single filing where there is not a
+	 * spouse or a spouse's age.
+	 * 
+	 * @throws Exception
+	 *             An exception will be thrown if the main program throws the
+	 *             exception.
+	 */
+	@Test
+	public void testLongConstructorMarriedFilingSeparately() throws Exception {
+
+<span class="fc" id="L590">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L591">				TaxCalculatorInterface.MARRIED_FILING_SEPARATELY, 31, 21);</span>
+<span class="fc" id="L592">		assertEquals(31, t.getAge());</span>
+<span class="fc" id="L593">		assertEquals(21, t.getSpouseAge());</span>
+<span class="fc" id="L594">		assertEquals(0.0, t.getGrossIncome());</span>
+
+<span class="fc" id="L596">	}</span>
+
+	/**
+	 * This test will verify that the long form of the constructor works
+	 * properly. This includes all types of single filing where there is not a
+	 * spouse or a spouse's age.
+	 * 
+	 * @throws Exception
+	 *             An exception will be thrown if the main program throws the
+	 *             exception.
+	 */
+	@Test
+	public void testLongConstructorInvalidParameters() throws Exception {
+		try {
+<span class="nc" id="L610">			t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="nc" id="L611">					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, -1, 21);</span>
+<span class="nc" id="L612">			fail();</span>
+<span class="pc" id="L613">		} catch (Exception ex) {</span>
+		}
+
+		try {
+<span class="nc" id="L617">			t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="nc" id="L618">					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 0, 21);</span>
+<span class="nc" id="L619">			fail();</span>
+<span class="pc" id="L620">		} catch (Exception ex) {</span>
+		}
+<span class="fc" id="L622">	}</span>
+
+	/**
+	 * This method will test the set income method to make certain it is
+	 * functioning properly.
+	 */
+	@Test
+	public void testSetIncome() {
+<span class="fc" id="L630">		t.setGrossIncome(1);</span>
+<span class="fc" id="L631">		assertEquals(1, t.getGrossIncome(), 0.01);</span>
+<span class="fc" id="L632">		t.setGrossIncome(-1);</span>
+<span class="fc" id="L633">		assertEquals(1, t.getGrossIncome(), 0.01);</span>
+<span class="fc" id="L634">	}</span>
+
+	/**
+	 * This method will verify that the getNetTaxRate calculation works properly
+	 * for the module.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetNetTaxRateSingleAge31() throws Exception {
+<span class="fc" id="L643">		t1 = new TaxCalculator(&quot;John Adams&quot;, TaxCalculator.SINGLE, 31);</span>
+<span class="fc" id="L644">		t1.setGrossIncome(5450);</span>
+<span class="fc" id="L645">		assertEquals(0, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L646">		t1.setGrossIncome(13474);</span>
+<span class="fc" id="L647">		assertEquals(5.95517292563456, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L648">		t1.setGrossIncome(13475);</span>
+<span class="fc" id="L649">		assertEquals(5.95547309833024, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L650">		t1.setGrossIncome(13476);</span>
+<span class="fc" id="L651">		assertEquals(5.95614425645592, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L652">		t1.setGrossIncome(37999);</span>
+<span class="fc" id="L653">		assertEquals(11.7926787547041, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L654">		t1.setGrossIncome(38000);</span>
+<span class="fc" id="L655">		assertEquals(11.7927631578947, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L656">		t1.setGrossIncome(38001);</span>
+<span class="fc" id="L657">		assertEquals(11.793110707613, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L658">		t1.setGrossIncome(84299);</span>
+<span class="fc" id="L659">		assertEquals(19.0464892821979, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L660">		t1.setGrossIncome(84300);</span>
+<span class="fc" id="L661">		assertEquals(19.0465599051008, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L662">		t1.setGrossIncome(84301);</span>
+<span class="fc" id="L663">		assertEquals(19.0466661130947, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L664">		t1.setGrossIncome(169999);</span>
+<span class="fc" id="L665">		assertEquals(23.5601209418879, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L666">		t1.setGrossIncome(170000);</span>
+<span class="fc" id="L667">		assertEquals(23.5601470588235, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L668">		t1.setGrossIncome(170001);</span>
+<span class="fc" id="L669">		assertEquals(23.5602025870436, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L670">		t1.setGrossIncome(363149);</span>
+<span class="fc" id="L671">		assertEquals(28.580946113028, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L672">		t1.setGrossIncome(363150);</span>
+<span class="fc" id="L673">		assertEquals(28.5809582817018, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L674">		t1.setGrossIncome(363151);</span>
+<span class="fc" id="L675">		assertEquals(28.5809759576595, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L676">		t1.setGrossIncome(405449);</span>
+<span class="fc" id="L677">		assertEquals(29.2506332485713, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L678">		t1.setGrossIncome(405450);</span>
+<span class="fc" id="L679">		assertEquals(29.2506474287828, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L680">	}</span>
+
+	/**
+	 * This method will verify that the getNetTaxRate calculation works properly
+	 * for the module.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetNetTaxRateSingleAge65() throws Exception {
+<span class="fc" id="L689">		t2 = new TaxCalculator(&quot;John Adams&quot;, TaxCalculator.SINGLE, 65);</span>
+<span class="fc" id="L690">		t2.setGrossIncome(6500);</span>
+<span class="fc" id="L691">		assertEquals(0, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L692">		t2.setGrossIncome(14524);</span>
+<span class="fc" id="L693">		assertEquals(5.52464885706417, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L694">		t2.setGrossIncome(14525);</span>
+<span class="fc" id="L695">		assertEquals(5.5249569707401, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L696">		t2.setGrossIncome(14526);</span>
+<span class="fc" id="L697">		assertEquals(5.52560925237505, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L698">		t2.setGrossIncome(39049);</span>
+<span class="fc" id="L699">		assertEquals(11.4755819611258, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L700">		t2.setGrossIncome(39050);</span>
+<span class="fc" id="L701">		assertEquals(11.4756722151088, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L702">		t2.setGrossIncome(39051);</span>
+<span class="fc" id="L703">		assertEquals(11.4760185398581, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L704">		t2.setGrossIncome(85349);</span>
+<span class="fc" id="L705">		assertEquals(18.8121712029432, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L706">		t2.setGrossIncome(85350);</span>
+<span class="fc" id="L707">		assertEquals(18.8122437024019, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L708">		t2.setGrossIncome(85351);</span>
+<span class="fc" id="L709">		assertEquals(18.8123513491348, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L710">		t2.setGrossIncome(171049);</span>
+<span class="fc" id="L711">		assertEquals(23.4154949751241, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L712">		t2.setGrossIncome(171050);</span>
+<span class="fc" id="L713">		assertEquals(23.4155217772581, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L714">		t2.setGrossIncome(171051);</span>
+<span class="fc" id="L715">		assertEquals(23.4155778101268, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L716">		t2.setGrossIncome(364199);</span>
+<span class="fc" id="L717">		assertEquals(28.4985461245089, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L718">		t2.setGrossIncome(364200);</span>
+<span class="fc" id="L719">		assertEquals(28.4985584843493, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L720">		t2.setGrossIncome(364201);</span>
+<span class="fc" id="L721">		assertEquals(28.4985763355949, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L722">		t2.setGrossIncome(406499);</span>
+<span class="fc" id="L723">		assertEquals(29.1750779214709, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L724">		t2.setGrossIncome(406500);</span>
+<span class="fc" id="L725">		assertEquals(29.1750922509225, t2.getNetTaxRate(), 0.001);</span>
+
+<span class="fc" id="L727">	}</span>
+
+	/**
+	 * This method will verify that the getNetTaxRate calculation works properly
+	 * for the module.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetNetTaxRateMarriedFilingSeparately31() throws Exception {
+<span class="fc" id="L736">		t1 = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L737">				TaxCalculator.MARRIED_FILING_SEPARATELY, 31, 31);</span>
+<span class="fc" id="L738">		t1.setGrossIncome(5450);</span>
+<span class="fc" id="L739">		assertEquals(0, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L740">		t1.setGrossIncome(13474);</span>
+<span class="fc" id="L741">		assertEquals(5.95517292563456, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L742">		t1.setGrossIncome(13475);</span>
+<span class="fc" id="L743">		assertEquals(5.95547309833024, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L744">		t1.setGrossIncome(13476);</span>
+<span class="fc" id="L745">		assertEquals(5.95614425645592, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L746">		t1.setGrossIncome(37999);</span>
+<span class="fc" id="L747">		assertEquals(11.7926787547041, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L748">		t1.setGrossIncome(38000);</span>
+<span class="fc" id="L749">		assertEquals(11.7927631578947, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L750">		t1.setGrossIncome(38001);</span>
+<span class="fc" id="L751">		assertEquals(11.793110707613, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L752">		t1.setGrossIncome(71174);</span>
+<span class="fc" id="L753">		assertEquals(17.9486188776801, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L754">		t1.setGrossIncome(71175);</span>
+<span class="fc" id="L755">		assertEquals(17.9487179487179, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L756">		t1.setGrossIncome(71176);</span>
+<span class="fc" id="L757">		assertEquals(17.948859166011, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L758">		t1.setGrossIncome(105599);</span>
+<span class="fc" id="L759">		assertEquals(21.2253146336613, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L760">		t1.setGrossIncome(105600);</span>
+<span class="fc" id="L761">		assertEquals(21.2253787878788, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L762">		t1.setGrossIncome(105601);</span>
+<span class="fc" id="L763">		assertEquals(21.2254902889177, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L764">		t1.setGrossIncome(184299);</span>
+<span class="fc" id="L765">		assertEquals(26.2533546031178, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L766">		t1.setGrossIncome(184300);</span>
+<span class="fc" id="L767">		assertEquals(26.2533912099837, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L768">		t1.setGrossIncome(184301);</span>
+<span class="fc" id="L769">		assertEquals(26.2534386682655, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L770">		t1.setGrossIncome(205449);</span>
+<span class="fc" id="L771">		assertEquals(27.1537705221247, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L772">		t1.setGrossIncome(205450);</span>
+<span class="fc" id="L773">		assertEquals(27.1538087125821, t1.getNetTaxRate(), 0.001);</span>
+
+<span class="fc" id="L775">	}</span>
+
+	/**
+	 * This method will verify that the getNetTaxRate calculation works properly
+	 * for the module.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetNetTaxRateHeadOfHousehold31() throws Exception {
+<span class="fc" id="L784">		t1 = new TaxCalculator(&quot;John Adams&quot;, TaxCalculator.HEAD_OF_HOUSEHOLD,</span>
+<span class="fc" id="L785">				31);</span>
+<span class="fc" id="L786">		t1.setGrossIncome(8000);</span>
+<span class="fc" id="L787">		assertEquals(0, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L788">		t1.setGrossIncome(19449);</span>
+<span class="fc" id="L789">		assertEquals(5.88667797830223, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L790">		t1.setGrossIncome(19450);</span>
+<span class="fc" id="L791">		assertEquals(5.88688946015424, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L792">		t1.setGrossIncome(19451);</span>
+<span class="fc" id="L793">		assertEquals(5.88735797645365, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L794">		t1.setGrossIncome(51649);</span>
+<span class="fc" id="L795">		assertEquals(11.5681813781487, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L796">		t1.setGrossIncome(51650);</span>
+<span class="fc" id="L797">		assertEquals(11.568247821878, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L798">		t1.setGrossIncome(51651);</span>
+<span class="fc" id="L799">		assertEquals(11.5685078701284, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L800">		t1.setGrossIncome(120649);</span>
+<span class="fc" id="L801">		assertEquals(19.2498487347595, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L802">		t1.setGrossIncome(120650);</span>
+<span class="fc" id="L803">		assertEquals(19.2498963945296, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L804">		t1.setGrossIncome(120651);</span>
+<span class="fc" id="L805">		assertEquals(19.2499689186165, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L806">		t1.setGrossIncome(190399);</span>
+<span class="fc" id="L807">		assertEquals(22.4553280216808, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L808">		t1.setGrossIncome(190400);</span>
+<span class="fc" id="L809">		assertEquals(22.4553571428571, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L810">		t1.setGrossIncome(190401);</span>
+<span class="fc" id="L811">		assertEquals(22.4554125240939, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L812">		t1.setGrossIncome(365699);</span>
+<span class="fc" id="L813">		assertEquals(27.5099658462287, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L814">		t1.setGrossIncome(365700);</span>
+<span class="fc" id="L815">		assertEquals(27.5099808586273, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L816">		t1.setGrossIncome(365701);</span>
+<span class="fc" id="L817">		assertEquals(27.5100013398924, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L818">		t1.setGrossIncome(407999);</span>
+<span class="fc" id="L819">		assertEquals(28.286503153194, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L820">		t1.setGrossIncome(408000);</span>
+<span class="fc" id="L821">		assertEquals(28.2865196078431, t1.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L822">	}</span>
+
+	/**
+	 * This method will verify that the getNetTaxRate calculation works properly
+	 * for the module.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGetNetTaxRateHeadOfHouseholdAge65() throws Exception {
+<span class="fc" id="L831">		t2 = new TaxCalculator(&quot;John Adams&quot;, TaxCalculator.HEAD_OF_HOUSEHOLD,</span>
+<span class="fc" id="L832">				65);</span>
+<span class="fc" id="L833">		t2.setGrossIncome(9050);</span>
+<span class="fc" id="L834">		assertEquals(0, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L835">		t2.setGrossIncome(20499);</span>
+<span class="fc" id="L836">		assertEquals(5.58515049514611, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L837">		t2.setGrossIncome(20500);</span>
+<span class="fc" id="L838">		assertEquals(5.58536585365854, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L839">		t2.setGrossIncome(20501);</span>
+<span class="fc" id="L840">		assertEquals(5.58582508170333, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L841">		t2.setGrossIncome(52699);</span>
+<span class="fc" id="L842">		assertEquals(11.3376914172944, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L843">		t2.setGrossIncome(52700);</span>
+<span class="fc" id="L844">		assertEquals(11.3377609108159, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L845">		t2.setGrossIncome(52701);</span>
+<span class="fc" id="L846">		assertEquals(11.3380201514203, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L847">		t2.setGrossIncome(121699);</span>
+<span class="fc" id="L848">		assertEquals(19.0837640407892, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L849">		t2.setGrossIncome(121700);</span>
+<span class="fc" id="L850">		assertEquals(19.0838126540674, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L851">		t2.setGrossIncome(121701);</span>
+<span class="fc" id="L852">		assertEquals(19.0838859171248, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L853">		t2.setGrossIncome(191449);</span>
+<span class="fc" id="L854">		assertEquals(22.3321720144791, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L855">		t2.setGrossIncome(191450);</span>
+<span class="fc" id="L856">		assertEquals(22.3322016192217, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L857">		t2.setGrossIncome(191451);</span>
+<span class="fc" id="L858">		assertEquals(22.3322573399982, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L859">		t2.setGrossIncome(366749);</span>
+<span class="fc" id="L860">		assertEquals(27.4312049930607, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L861">		t2.setGrossIncome(366750);</span>
+<span class="fc" id="L862">		assertEquals(27.4312201772324, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L863">		t2.setGrossIncome(366751);</span>
+<span class="fc" id="L864">		assertEquals(27.4312408146126, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L865">		t2.setGrossIncome(409049);</span>
+<span class="fc" id="L866">		assertEquals(28.213893689998, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L867">		t2.setGrossIncome(409050);</span>
+<span class="fc" id="L868">		assertEquals(28.2139102799169, t2.getNetTaxRate(), 0.001);</span>
+<span class="fc" id="L869">	}</span>
+
+	@Test
+	/**
+	 * This method will verify that the get taxable income method is working properly.
+	 * @throws Exception
+	 */
+	public void testGetTaxableIncomeSingleAge31() throws Exception {
+<span class="fc" id="L877">		t1 = new TaxCalculator(&quot;John Adams&quot;, TaxCalculator.SINGLE, 31);</span>
+<span class="fc" id="L878">		t1.setGrossIncome(5450);</span>
+<span class="fc" id="L879">		assertEquals(0, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L880">		t1.setGrossIncome(13474);</span>
+<span class="fc" id="L881">		assertEquals(8024, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L882">		t1.setGrossIncome(13475);</span>
+<span class="fc" id="L883">		assertEquals(8025, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L884">		t1.setGrossIncome(13476);</span>
+<span class="fc" id="L885">		assertEquals(8026, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L886">		t1.setGrossIncome(37999);</span>
+<span class="fc" id="L887">		assertEquals(32549, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L888">		t1.setGrossIncome(38000);</span>
+<span class="fc" id="L889">		assertEquals(32550, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L890">		t1.setGrossIncome(38001);</span>
+<span class="fc" id="L891">		assertEquals(32551, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L892">		t1.setGrossIncome(84299);</span>
+<span class="fc" id="L893">		assertEquals(78849, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L894">		t1.setGrossIncome(84300);</span>
+<span class="fc" id="L895">		assertEquals(78850, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L896">		t1.setGrossIncome(84301);</span>
+<span class="fc" id="L897">		assertEquals(78851, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L898">		t1.setGrossIncome(169999);</span>
+<span class="fc" id="L899">		assertEquals(164549, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L900">		t1.setGrossIncome(170000);</span>
+<span class="fc" id="L901">		assertEquals(164550, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L902">		t1.setGrossIncome(170001);</span>
+<span class="fc" id="L903">		assertEquals(164551, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L904">		t1.setGrossIncome(363149);</span>
+<span class="fc" id="L905">		assertEquals(357699, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L906">		t1.setGrossIncome(363150);</span>
+<span class="fc" id="L907">		assertEquals(357700, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L908">		t1.setGrossIncome(363151);</span>
+<span class="fc" id="L909">		assertEquals(357701, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L910">		t1.setGrossIncome(405449);</span>
+<span class="fc" id="L911">		assertEquals(399999, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L912">		t1.setGrossIncome(405450);</span>
+<span class="fc" id="L913">		assertEquals(400000, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L914">	}</span>
+
+	@Test
+	/**
+	 * This method will verify that the get taxable income method is working properly.
+	 * @throws Exception
+	 */
+	public void testGetTaxableIncomeHeadOfHouseholdAge31() throws Exception {
+<span class="fc" id="L922">		t1 = new TaxCalculator(&quot;John Adams&quot;, TaxCalculator.HEAD_OF_HOUSEHOLD,</span>
+<span class="fc" id="L923">				31);</span>
+<span class="fc" id="L924">		t1.setGrossIncome(8000);</span>
+<span class="fc" id="L925">		assertEquals(0, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L926">		t1.setGrossIncome(19449);</span>
+<span class="fc" id="L927">		assertEquals(11449, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L928">		t1.setGrossIncome(19450);</span>
+<span class="fc" id="L929">		assertEquals(11450, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L930">		t1.setGrossIncome(19451);</span>
+<span class="fc" id="L931">		assertEquals(11451, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L932">		t1.setGrossIncome(51649);</span>
+<span class="fc" id="L933">		assertEquals(43649, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L934">		t1.setGrossIncome(51650);</span>
+<span class="fc" id="L935">		assertEquals(43650, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L936">		t1.setGrossIncome(51651);</span>
+<span class="fc" id="L937">		assertEquals(43651, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L938">		t1.setGrossIncome(120649);</span>
+<span class="fc" id="L939">		assertEquals(112649, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L940">		t1.setGrossIncome(120650);</span>
+<span class="fc" id="L941">		assertEquals(112650, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L942">		t1.setGrossIncome(120651);</span>
+<span class="fc" id="L943">		assertEquals(112651, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L944">		t1.setGrossIncome(190399);</span>
+<span class="fc" id="L945">		assertEquals(182399, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L946">		t1.setGrossIncome(190400);</span>
+<span class="fc" id="L947">		assertEquals(182400, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L948">		t1.setGrossIncome(190401);</span>
+<span class="fc" id="L949">		assertEquals(182401, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L950">		t1.setGrossIncome(365699);</span>
+<span class="fc" id="L951">		assertEquals(357699, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L952">		t1.setGrossIncome(365700);</span>
+<span class="fc" id="L953">		assertEquals(357700, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L954">		t1.setGrossIncome(365701);</span>
+<span class="fc" id="L955">		assertEquals(357701, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L956">		t1.setGrossIncome(407999);</span>
+<span class="fc" id="L957">		assertEquals(399999, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L958">		t1.setGrossIncome(408000);</span>
+<span class="fc" id="L959">		assertEquals(400000, t1.getTaxableIncome(), 0.01);</span>
+<span class="fc" id="L960">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionSingle31() throws Exception {
+		// Set up to test single.
+<span class="fc" id="L969">		t = new TaxCalculator(&quot;John Adams&quot;, TaxCalculatorInterface.SINGLE, 31);</span>
+<span class="fc" id="L970">		assertEquals(5450, t.getStandardDeduction(), 0.01);</span>
+<span class="fc" id="L971">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionSingle65() throws Exception {
+
+<span class="fc" id="L980">		t = new TaxCalculator(&quot;John Adams&quot;, TaxCalculatorInterface.SINGLE, 65);</span>
+<span class="fc" id="L981">		assertEquals(5450 + 1050, t.getStandardDeduction(), 0.01);</span>
+
+<span class="fc" id="L983">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionMarriedFilingSeparately31()
+			throws Exception {
+
+		// Set up to test married filing separately.
+<span class="fc" id="L994">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L995">				TaxCalculatorInterface.MARRIED_FILING_SEPARATELY, 31, 31);</span>
+<span class="fc" id="L996">		assertEquals(5450, t.getStandardDeduction(), 0.01);</span>
+<span class="fc" id="L997">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionMarriuedFilingSeparately65()
+			throws Exception {
+
+<span class="fc" id="L1007">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1008">				TaxCalculatorInterface.MARRIED_FILING_SEPARATELY, 65, 66);</span>
+<span class="fc" id="L1009">		assertEquals(5450 + 1050, t.getStandardDeduction(), 0.01);</span>
+<span class="fc" id="L1010">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionHeadOfHousehold31() throws Exception {
+
+		// Set up to test head of household.
+<span class="fc" id="L1020">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1021">				TaxCalculatorInterface.HEAD_OF_HOUSEHOLD, 31);</span>
+<span class="fc" id="L1022">		assertEquals(8000, t.getStandardDeduction(), 0.01);</span>
+<span class="fc" id="L1023">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionHeadOfHousehold65() throws Exception {
+
+<span class="fc" id="L1032">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1033">				TaxCalculatorInterface.HEAD_OF_HOUSEHOLD, 65);</span>
+<span class="fc" id="L1034">		assertEquals(8000 + 1050, t.getStandardDeduction(), 0.01);</span>
+<span class="fc" id="L1035">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionQualifyingWidower31() throws Exception {
+
+		// Set up to test head of household.
+<span class="fc" id="L1045">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1046">				TaxCalculatorInterface.QUALIFYING_WIDOWER, 31);</span>
+<span class="fc" id="L1047">		assertEquals(10900, t.getStandardDeduction(), 0.01);</span>
+<span class="fc" id="L1048">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionQualifyingWidower65() throws Exception {
+
+<span class="fc" id="L1057">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1058">				TaxCalculatorInterface.QUALIFYING_WIDOWER, 65);</span>
+<span class="fc" id="L1059">		assertEquals(10900 + 1050, t.getStandardDeduction(), 0.01);</span>
+<span class="fc" id="L1060">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionMarriedFilingJointly31() throws Exception {
+
+		// Set up to test Married filing jointly.
+<span class="fc" id="L1070">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1071">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 31, 31);</span>
+<span class="fc" id="L1072">		assertEquals(10900, t.getStandardDeduction(), 0.01);</span>
+<span class="fc" id="L1073">	}</span>
+
+	@Test
+	/**
+	 * This method will test that the standardDeductionMethod is working properly for the given criteria.
+	 * @throws Exception
+	 */
+	public void testStandardDeductionMarriedFilingJointly65() throws Exception {
+
+<span class="fc" id="L1082">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1083">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 65, 65);</span>
+<span class="fc" id="L1084">		assertEquals(1050 + 1050 + 10900, t.getStandardDeduction(), 0.01);</span>
+
+<span class="fc" id="L1086">	}</span>
+
+	@Test
+	/**
+	 *This method will test if a return is required for the given criteria.  The criteria is defined in the name of the method.
+	 * @throws Exception
+	 */
+	public void testReturnRequiredSingle31() throws Exception {
+		// Set up to test single.
+<span class="fc" id="L1095">		t = new TaxCalculator(&quot;John Adams&quot;, TaxCalculatorInterface.SINGLE, 31);</span>
+<span class="fc" id="L1096">		t.setGrossIncome(8949.00);</span>
+<span class="fc" id="L1097">		assertEquals(false, t.isReturnRequired());</span>
+
+<span class="fc" id="L1099">		t.setGrossIncome(8950.00);</span>
+<span class="fc" id="L1100">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1102">		t.setGrossIncome(8951.00);</span>
+<span class="fc" id="L1103">		assertEquals(true, t.isReturnRequired());</span>
+<span class="fc" id="L1104">	}</span>
+
+	@Test
+	/**
+	 *This method will test if a return is required for the given criteria.  The criteria is defined in the name of the method.
+	 * @throws Exception
+	 */
+	public void testReturnRequiredSingle65() throws Exception {
+
+<span class="fc" id="L1113">		t = new TaxCalculator(&quot;John Adams&quot;, TaxCalculatorInterface.SINGLE, 65);</span>
+<span class="fc" id="L1114">		t.setGrossIncome(10299.00);</span>
+<span class="fc" id="L1115">		assertEquals(false, t.isReturnRequired());</span>
+
+<span class="fc" id="L1117">		t.setGrossIncome(10300.00);</span>
+<span class="fc" id="L1118">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1120">		t.setGrossIncome(10301.00);</span>
+<span class="fc" id="L1121">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1123">	}</span>
+
+	@Test
+	/**
+	 *This method will test if a return is required for the given criteria.  The criteria is defined in the name of the method.
+	 * @throws Exception
+	 */
+	public void testReturnRequiredHeadOfHousehold31() throws Exception {
+
+		// Set up to test head of household.
+<span class="fc" id="L1133">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1134">				TaxCalculatorInterface.HEAD_OF_HOUSEHOLD, 31);</span>
+<span class="fc" id="L1135">		t.setGrossIncome(11499);</span>
+<span class="fc" id="L1136">		assertEquals(false, t.isReturnRequired());</span>
+
+<span class="fc" id="L1138">		t.setGrossIncome(11500.00);</span>
+<span class="fc" id="L1139">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1141">		t.setGrossIncome(11501.00);</span>
+<span class="fc" id="L1142">		assertEquals(true, t.isReturnRequired());</span>
+<span class="fc" id="L1143">	}</span>
+
+	@Test
+	/**
+	 *This method will test if a return is required for the given criteria.  The criteria is defined in the name of the method.
+	 * @throws Exception
+	 */
+	public void testReturnRequiredQualifyingWidower31() throws Exception {
+
+		// Set up to test head of household.
+<span class="fc" id="L1153">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1154">				TaxCalculatorInterface.QUALIFYING_WIDOWER, 31);</span>
+<span class="fc" id="L1155">		t.setGrossIncome(14399);</span>
+<span class="fc" id="L1156">		assertEquals(false, t.isReturnRequired());</span>
+
+<span class="fc" id="L1158">		t.setGrossIncome(14400);</span>
+<span class="fc" id="L1159">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1161">		t.setGrossIncome(14401);</span>
+<span class="fc" id="L1162">		assertEquals(true, t.isReturnRequired());</span>
+<span class="fc" id="L1163">	}</span>
+
+	@Test
+	/**
+	 *This method will test if a return is required for the given criteria.  The criteria is defined in the name of the method.
+	 * @throws Exception
+	 */
+	public void testReturnRequiredQualifyingWidower65() throws Exception {
+
+<span class="fc" id="L1172">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1173">				TaxCalculatorInterface.QUALIFYING_WIDOWER, 65);</span>
+<span class="fc" id="L1174">		t.setGrossIncome(15449);</span>
+<span class="fc" id="L1175">		assertEquals(false, t.isReturnRequired());</span>
+
+<span class="fc" id="L1177">		t.setGrossIncome(15450);</span>
+<span class="fc" id="L1178">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1180">		t.setGrossIncome(15451);</span>
+<span class="fc" id="L1181">		assertEquals(true, t.isReturnRequired());</span>
+<span class="fc" id="L1182">	}</span>
+
+	@Test
+	/**
+	 *This method will test if a return is required for the given criteria.  The criteria is defined in the name of the method.
+	 * @throws Exception
+	 */
+	public void testReturnRequiredMarriedFilingJointly31() throws Exception {
+
+		// Set up to test Married filing jointly.
+<span class="fc" id="L1192">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1193">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 31, 31);</span>
+<span class="fc" id="L1194">		t.setGrossIncome(17899);</span>
+<span class="fc" id="L1195">		assertEquals(false, t.isReturnRequired());</span>
+
+<span class="fc" id="L1197">		t.setGrossIncome(17900);</span>
+<span class="fc" id="L1198">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1200">		t.setGrossIncome(17901);</span>
+<span class="fc" id="L1201">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1203">	}</span>
+
+	@Test
+	/**
+	 *This method will test if a return is required for the given criteria.  The criteria is defined in the name of the method.
+	 * @throws Exception
+	 */
+	public void testReturnRequiredMarriedFilingJointly65() throws Exception {
+
+<span class="fc" id="L1212">		t = new TaxCalculator(&quot;John Adams&quot;,</span>
+<span class="fc" id="L1213">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 65, 65);</span>
+<span class="fc" id="L1214">		t.setGrossIncome(19999);</span>
+<span class="fc" id="L1215">		assertEquals(false, t.isReturnRequired());</span>
+
+<span class="fc" id="L1217">		t.setGrossIncome(20000);</span>
+<span class="fc" id="L1218">		assertEquals(true, t.isReturnRequired());</span>
+
+<span class="fc" id="L1220">		t.setGrossIncome(20001);</span>
+<span class="fc" id="L1221">		assertEquals(true, t.isReturnRequired());</span>
+<span class="fc" id="L1222">	}</span>
+	
+	@Test
+	/**
+	 * Method tests get and setName
+	 */
+	public void testGetAndSet() throws Exception {
+<span class="fc" id="L1229">		TaxCalculator tax = new TaxCalculator(&quot;John Smith&quot;,</span>
+<span class="fc" id="L1230">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 40);</span>
+<span class="fc" id="L1231">		tax.setName(&quot;Bob Smith&quot;);</span>
+<span class="fc" id="L1232">		assertEquals(&quot;Bob Smith&quot;, tax.getName());</span>
+<span class="fc" id="L1233">	}</span>
+
+	@Test(expected=Exception.class)
+	/**
+	 * Method tests empty name
+	 */
+	public void testEmptyName(){
+		try {
+<span class="nc" id="L1241">			TaxCalculator tax = new TaxCalculator(&quot;&quot;,</span>
+<span class="nc" id="L1242">					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 40);</span>
+<span class="pc" id="L1243">		} catch (Exception e) {</span>
+<span class="fc" id="L1244">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L1246">	}</span>
+	
+	@Test(expected=Exception.class)
+	/**
+	 * Method tests no last name
+	 */
+	public void testOnlyFirstName(){
+		try {
+<span class="nc" id="L1254">			TaxCalculator tax = new TaxCalculator(&quot;Bob&quot;,</span>
+<span class="nc" id="L1255">					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 40);</span>
+<span class="pc" id="L1256">		} catch (Exception e) {</span>
+<span class="fc" id="L1257">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L1259">	}</span>
+	
+	@Test(expected=Exception.class)
+	/**
+	 * Method tests no last name
+	 */
+	public void testSpouseAgeZero(){
+		try {
+<span class="nc" id="L1267">			TaxCalculator tax = new TaxCalculator(&quot;Bob Smith&quot;,</span>
+<span class="nc" id="L1268">					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 0);</span>
+<span class="pc" id="L1269">		} catch (Exception e) {</span>
+<span class="fc" id="L1270">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L1272">	}</span>
+	
+	@Test(expected=Exception.class)
+	/**
+	 * Method tests empty name
+	 */
+	public void testSingleEmptyName(){
+		try {
+<span class="nc" id="L1280">			TaxCalculator tax = new TaxCalculator(&quot;&quot;,</span>
+<span class="nc" id="L1281">					TaxCalculatorInterface.SINGLE, 40);</span>
+<span class="pc" id="L1282">		} catch (Exception e) {</span>
+<span class="fc" id="L1283">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L1285">	}</span>
+	
+	@Test(expected=Exception.class)
+	/**
+	 * Method tests no last name
+	 */
+	public void testSingleOnlyFirstName(){
+		try {
+<span class="nc" id="L1293">			TaxCalculator tax = new TaxCalculator(&quot;Bob&quot;,</span>
+<span class="nc" id="L1294">					TaxCalculatorInterface.SINGLE, 40);</span>
+<span class="pc" id="L1295">		} catch (Exception e) {</span>
+<span class="fc" id="L1296">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L1298">	}</span>
+	
+	@Test(expected=Exception.class)
+	/**
+	 * Method tests no last name
+	 */
+	public void testSingleAgeZero(){
+		try {
+<span class="nc" id="L1306">			TaxCalculator tax = new TaxCalculator(&quot;Bob Smith&quot;,</span>
+<span class="nc" id="L1307">					TaxCalculatorInterface.SINGLE, 0);</span>
+<span class="pc" id="L1308">		} catch (Exception e) {</span>
+<span class="fc" id="L1309">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L1311">	}</span>
+	
+	@Test
+	/**
+	 * Method tests 65 year old with younger spouse
+	 */
+	public void test65YoungerSpouse() throws Exception {
+<span class="fc" id="L1318">		TaxCalculator tax = new TaxCalculator(&quot;John Smith&quot;,</span>
+<span class="fc" id="L1319">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 66, 40);</span>
+<span class="fc" id="L1320">		assertEquals(11950.0, tax.getStandardDeduction());</span>
+<span class="fc" id="L1321">	}</span>
+	
+	@Test
+	/**
+	 * Method tests younger individual with over 65 spouse
+	 */
+	public void test65OlderSpouse() throws Exception {
+<span class="fc" id="L1328">		TaxCalculator tax = new TaxCalculator(&quot;John Smith&quot;,</span>
+<span class="fc" id="L1329">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 66);</span>
+<span class="fc" id="L1330">		assertEquals(11950.0, tax.getStandardDeduction());</span>
+<span class="fc" id="L1331">	}</span>
+	
+	@Test
+	/**
+	 * Method tests get and setName
+	 */
+	public void testSeparateUnder65() throws Exception {
+<span class="fc" id="L1338">		TaxCalculator tax = new TaxCalculator(&quot;John Smith&quot;,</span>
+<span class="fc" id="L1339">				TaxCalculatorInterface.MARRIED_FILING_SEPARATELY, 40, 40);</span>
+<span class="fc" id="L1340">		tax.setGrossIncome(40000);</span>
+<span class="fc" id="L1341">		assertEquals(true, tax.isReturnRequired());</span>
+<span class="fc" id="L1342">	}</span>
+	
+	@Test
+	/**
+	 * Method tests get and setName
+	 */
+	public void testSeparateOneUnder65() throws Exception {
+<span class="fc" id="L1349">		TaxCalculator tax = new TaxCalculator(&quot;John Smith&quot;,</span>
+<span class="fc" id="L1350">				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 66, 40);</span>
+<span class="fc" id="L1351">		tax.setGrossIncome(40000);</span>
+<span class="fc" id="L1352">		assertEquals(true, tax.isReturnRequired());</span>
+<span class="fc" id="L1353">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TaxCalculatorTest (Mar 25, 2015 11:30:47 PM)</div></body></html>

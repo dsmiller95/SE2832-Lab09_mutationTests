@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>TaxCalculator.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TaxCalculatorTest (Mar 25, 2015 11:30:47 PM)</a> &gt; <a href="../../index.html" class="el_group">CodeCoverageA</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">edu.msoe.se2832.taxRateCalculator.wschilling</a> &gt; <span class="el_source">TaxCalculator.java</span></div><h1>TaxCalculator.java</h1><pre class="source lang-java linenums">package edu.msoe.se2832.taxRateCalculator.wschilling;
+
+// Note: The following code specifically has been modified for code coverage analysis.
+
+/**
+ * @author schilling This class will calculate a users tax bill based upon their
+ *         gross income and their status. It assumes no dependents and the user
+ *         only uses the standard deduction (i.e. no itemization.) It is based
+ *         upon the 2008 tax tables.
+ */
+public class TaxCalculator implements TaxCalculatorInterface {
+	private String name; // This holds the name of the tax payer.
+	private int filingStatus; // This holds the filing status of the tax payer.
+	private int age; // This is the age of the tax payer.
+	private int spouseAge; // This is the age of the spouse.
+	private double grossIncome; // This is the gross income for the taxpayer.
+
+	public String getName() {
+<span class="fc" id="L19">		return name;</span>
+	}
+
+	public void setName(String name) {
+<span class="fc" id="L23">		this.name = name;</span>
+<span class="fc" id="L24">	}</span>
+
+	/**
+	 * @param name
+	 *            This is the name of the taxpayer. It must be a non-empty
+	 *            string.
+	 * @param filingStatus
+	 *            This is the filing status for the person. Single, Head of
+	 *            Household, and Qualifying widower may use this constructor.
+	 * @param age
+	 *            This is the age of the taxpayer. Must be greater than 0 years.
+	 * @throws Exception
+	 *             An exception will be thrown if any parameter is out of bounds
+	 *             or the filing status is incorrect (i.e. the status requires a
+	 *             spouse.) Exception will also be thrown if there is not a
+	 *             first and last name provided.
+	 */
+<span class="fc" id="L41">	public TaxCalculator(String name, int filingStatus, int age)</span>
+			throws Exception {
+		// Check the validity of all parameters.
+<span class="fc bfc" id="L44" title="All 2 branches covered.">		if (name.length() &lt;= 0) {</span>
+<span class="fc" id="L45">			throw new Exception(</span>
+<span class="fc" id="L46">					&quot;Name must be longer than 0 characters in length. &quot;);</span>
+		}
+
+		// Check to make certain that a first and last name is provided.
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		if (name.split(&quot;\\s+&quot;).length &lt; 2) {</span>
+<span class="fc" id="L51">			throw new Exception(</span>
+<span class="fc" id="L52">					&quot;Name must have at least a first and last name.&quot;);</span>
+		}
+
+		// Check that the filing status is valid for a person who does not have
+		// a spouse.
+<span class="fc bfc" id="L57" title="All 4 branches covered.">		if ((filingStatus != SINGLE) &amp;&amp; (filingStatus != HEAD_OF_HOUSEHOLD)</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">				&amp;&amp; (filingStatus != QUALIFYING_WIDOWER)) {</span>
+<span class="fc" id="L59">			throw new Exception(&quot;Invalid filing status for this constructor.&quot;);</span>
+		}
+
+		// Check that the age is valid.
+<span class="fc bfc" id="L63" title="All 2 branches covered.">		if (age &lt;= 0) {</span>
+<span class="fc" id="L64">			throw new Exception(&quot;Invalid age.&quot;);</span>
+		}
+
+		// Set the appropriate attributes of the class.
+<span class="fc" id="L68">		this.name = name;</span>
+<span class="fc" id="L69">		this.filingStatus = filingStatus;</span>
+<span class="fc" id="L70">		this.age = age;</span>
+<span class="fc" id="L71">	}</span>
+
+	/**
+	 * @param name
+	 *            This is the name of the taxpayer. It must be a non-empty
+	 *            string.
+	 * @param filingStatus
+	 *            This is the filing status for the person. Single, Head of
+	 *            Household, and Qualifying widower may not use this
+	 *            constructor.
+	 * @param age
+	 *            This is the age of the taxpayer. Must be greater than 0 years.
+	 * @param spouseAge
+	 *            This is the age of the spouse. Must be greater than 0 years
+	 *            old.
+	 * @throws Exception
+	 *             An exception will be thrown if any parameter is out of bounds
+	 *             or the filing status is incorrect (i.e. the status does not
+	 *             require a spouse.) Exception will also be thrown if there is
+	 *             not a first and last name provided.
+	 */
+<span class="fc" id="L92">	public TaxCalculator(String name, int filingStatus, int age, int spouseAge)</span>
+			throws Exception {
+		// Check the validity of all parameters.
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">		if (name.length() &lt; 0) {</span>
+<span class="nc" id="L96">			throw new Exception(</span>
+<span class="nc" id="L97">					&quot;Name must be longer than 0 characters in length. &quot;);</span>
+		}
+
+		// Check to make certain that a first and last name is provided.
+<span class="fc bfc" id="L101" title="All 2 branches covered.">		if (name.split(&quot;\\s+&quot;).length &lt; 2) {</span>
+<span class="fc" id="L102">			throw new Exception(</span>
+<span class="fc" id="L103">					&quot;Name must have at least a first and last name.&quot;);</span>
+		}
+
+		// Check to make certain that the status is correct.
+<span class="fc bfc" id="L107" title="All 2 branches covered.">		if ((filingStatus != MARRIED_FILING_JOINTLY)</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">				&amp;&amp; (filingStatus != MARRIED_FILING_SEPARATELY)) {</span>
+<span class="fc" id="L109">			throw new Exception(&quot;Invalid filing status for this constructor.&quot;);</span>
+		}
+
+		// Check that the age is valid.
+<span class="fc bfc" id="L113" title="All 2 branches covered.">		if (age &lt;= 0) {</span>
+<span class="fc" id="L114">			throw new Exception(&quot;Invalid age.&quot;);</span>
+		}
+
+		// Check that the spouse age is valid.
+<span class="fc bfc" id="L118" title="All 2 branches covered.">		if (spouseAge &lt;= 0) {</span>
+<span class="fc" id="L119">			throw new Exception(&quot;Invalid Age.&quot;);</span>
+		}
+
+		// Set the attributes.
+<span class="fc" id="L123">		this.name = name;</span>
+<span class="fc" id="L124">		this.filingStatus = filingStatus;</span>
+<span class="fc" id="L125">		this.age = age;</span>
+<span class="fc" id="L126">		this.spouseAge = spouseAge;</span>
+<span class="fc" id="L127">	}</span>
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#getStandardDeduction()
+	 */
+	public double getStandardDeduction() {
+<span class="fc" id="L135">		double baseStandardDeduction = 0;</span>
+		// Based on the filing status, select the right value with the case
+		// statement.
+<span class="pc bpc" id="L138" title="1 of 6 branches missed.">		switch (this.filingStatus) {</span>
+		case SINGLE:
+<span class="fc" id="L140">			baseStandardDeduction = 5450;</span>
+			// If the filer is older than 65, the standard deduction increases
+			// as
+			// well.
+<span class="fc bfc" id="L144" title="All 2 branches covered.">			if (age &gt;= 65) {</span>
+<span class="fc" id="L145">				baseStandardDeduction += 1050;</span>
+			}
+
+<span class="fc" id="L148">			break;</span>
+		case MARRIED_FILING_JOINTLY:
+<span class="fc" id="L150">			baseStandardDeduction = 10900;</span>
+			// If the filer is older than 65, the standard deduction increases
+			// as
+			// well.
+<span class="fc bfc" id="L154" title="All 4 branches covered.">			if ((age &gt;= 65) &amp;&amp; (this.spouseAge &gt;= 65)) {</span>
+<span class="fc" id="L155">				baseStandardDeduction += 2100;</span>
+<span class="fc bfc" id="L156" title="All 4 branches covered.">			} else if ((age &lt; 65) &amp;&amp; (this.spouseAge &gt;= 65)) {</span>
+<span class="fc" id="L157">				baseStandardDeduction += 1050;</span>
+<span class="pc bpc" id="L158" title="1 of 4 branches missed.">			} else if ((age &gt;= 65) &amp;&amp; (this.spouseAge &lt; 65)) {</span>
+<span class="fc" id="L159">				baseStandardDeduction += 1050;</span>
+			} else {
+				// Add nothing extra.
+			}
+<span class="fc" id="L163">			break;</span>
+		case QUALIFYING_WIDOWER:
+<span class="fc" id="L165">			baseStandardDeduction = 10900;</span>
+			// If the filer is older than 65, the standard deduction increases
+			// as
+			// well.
+<span class="fc bfc" id="L169" title="All 2 branches covered.">			if (age &gt;= 65) {</span>
+<span class="fc" id="L170">				baseStandardDeduction += 1050;</span>
+			}
+<span class="fc" id="L172">			break;</span>
+		case MARRIED_FILING_SEPARATELY:
+<span class="fc" id="L174">			baseStandardDeduction = 5450;</span>
+			// If the filer is older than 65, the standard deduction increases
+			// as
+			// well.
+<span class="fc bfc" id="L178" title="All 2 branches covered.">			if (age &gt;= 65) {</span>
+<span class="fc" id="L179">				baseStandardDeduction += 1050;</span>
+			}
+<span class="fc" id="L181">			break;</span>
+		case HEAD_OF_HOUSEHOLD:
+<span class="fc" id="L183">			baseStandardDeduction = 8000;</span>
+			// If the filer is older than 65, the standard deduction increases
+			// as
+			// well.
+<span class="fc bfc" id="L187" title="All 2 branches covered.">			if (age &gt;= 65) {</span>
+<span class="fc" id="L188">				baseStandardDeduction += 1050;</span>
+			}
+<span class="fc" id="L190">			break;</span>
+		default:
+			break;
+		}
+
+<span class="fc" id="L195">		return baseStandardDeduction;</span>
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#isReturnRequired()
+	 */
+	public boolean isReturnRequired() {
+
+		double currentThreshold;
+
+<span class="fc bfc" id="L207" title="All 2 branches covered.">		if (age &lt; 65) {</span>
+<span class="pc bpc" id="L208" title="1 of 6 branches missed.">			switch (this.filingStatus) {</span>
+
+			case SINGLE:
+<span class="fc" id="L211">				currentThreshold = 8950;</span>
+<span class="fc" id="L212">				break;</span>
+
+			case HEAD_OF_HOUSEHOLD:
+<span class="fc" id="L215">				currentThreshold = 11500;</span>
+<span class="fc" id="L216">				break;</span>
+
+			case MARRIED_FILING_JOINTLY:
+<span class="fc" id="L219">				currentThreshold = 17900;</span>
+<span class="fc" id="L220">				break;</span>
+
+			case MARRIED_FILING_SEPARATELY:
+<span class="fc" id="L223">				currentThreshold = 3500;</span>
+<span class="fc" id="L224">				break;</span>
+
+			case QUALIFYING_WIDOWER:
+<span class="fc" id="L227">				currentThreshold = 14400;</span>
+<span class="fc" id="L228">				break;</span>
+			default:
+<span class="nc" id="L230">				currentThreshold = Double.MAX_VALUE;</span>
+			}
+
+<span class="nc" id="L233">		} else {</span>
+<span class="pc bpc" id="L234" title="3 of 6 branches missed.">			switch (this.filingStatus) {</span>
+
+			case SINGLE:
+<span class="fc" id="L237">				currentThreshold = 10300;</span>
+<span class="fc" id="L238">				break;</span>
+
+			case HEAD_OF_HOUSEHOLD:
+<span class="nc" id="L241">				currentThreshold = 12850;</span>
+<span class="nc" id="L242">				break;</span>
+
+			case MARRIED_FILING_JOINTLY:
+<span class="fc" id="L245">				currentThreshold = 20000;</span>
+<span class="fc" id="L246">				break;</span>
+
+			case MARRIED_FILING_SEPARATELY:
+<span class="nc" id="L249">				currentThreshold = 3500;</span>
+<span class="nc" id="L250">				break;</span>
+
+			case QUALIFYING_WIDOWER:
+<span class="fc" id="L253">				currentThreshold = 15450;</span>
+<span class="fc" id="L254">				break;</span>
+			default:
+<span class="nc" id="L256">				currentThreshold = Double.MAX_VALUE;</span>
+			}
+		}
+		// Adjust for married filing jointly exceptions. */
+<span class="fc bfc" id="L260" title="All 2 branches covered.">		if (this.filingStatus == TaxCalculatorInterface.MARRIED_FILING_JOINTLY) {</span>
+<span class="fc bfc" id="L261" title="All 4 branches covered.">			if ((age &gt;= 65) &amp;&amp; (spouseAge &gt;= 65)) {</span>
+<span class="fc" id="L262">				currentThreshold = 20000;</span>
+<span class="pc bpc" id="L263" title="1 of 4 branches missed.">			} else if (((age &lt; 65) &amp;&amp; (spouseAge &gt;= 65))</span>
+<span class="pc bpc" id="L264" title="1 of 4 branches missed.">					|| ((age &gt;= 65) &amp;&amp; (spouseAge &lt; 65))) {</span>
+<span class="fc" id="L265">				currentThreshold = 18950;</span>
+<span class="fc" id="L266">			} else {</span>
+<span class="fc" id="L267">				currentThreshold = 17900;</span>
+			}
+		}
+<span class="fc bfc" id="L270" title="All 2 branches covered.">		if (this.grossIncome &lt; currentThreshold) {</span>
+<span class="fc" id="L271">			return false;</span>
+		} else {
+
+<span class="fc" id="L274">			return true;</span>
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#getFilingStatus()
+	 */
+	public int getFilingStatus() {
+<span class="fc" id="L284">		return filingStatus;</span>
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#getAge()
+	 */
+	public int getAge() {
+<span class="fc" id="L293">		return age;</span>
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#getSpouseAge()
+	 */
+	public int getSpouseAge() {
+<span class="fc" id="L302">		return spouseAge;</span>
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#getGrossIncome()
+	 */
+	public double getGrossIncome() {
+<span class="fc" id="L311">		return grossIncome;</span>
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#getTaxableIncome()
+	 */
+	public double getTaxableIncome() {
+		double retVal;
+<span class="fc" id="L321">		retVal = this.grossIncome - this.getStandardDeduction();</span>
+
+<span class="fc bfc" id="L323" title="All 2 branches covered.">		if (this.grossIncome - this.getStandardDeduction() &gt; 0) {</span>
+<span class="fc" id="L324">			retVal = this.grossIncome - this.getStandardDeduction();</span>
+<span class="pc bpc" id="L325" title="1 of 2 branches missed.">		} else if (this.grossIncome - this.getStandardDeduction() &lt; 0) {</span>
+<span class="nc" id="L326">			retVal = 0.0;</span>
+<span class="pc bpc" id="L327" title="1 of 2 branches missed.">		} else if (this.grossIncome - this.getStandardDeduction() == 0) {</span>
+<span class="fc" id="L328">			retVal = 0.0;</span>
+<span class="fc" id="L329">		} else {</span>
+			// A really strange thing has happened. I do not know what to do.
+<span class="nc" id="L331">			retVal = Double.NEGATIVE_INFINITY;</span>
+		}
+<span class="fc" id="L333">		return retVal;</span>
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#setGrossIncome(double)
+	 */
+	public void setGrossIncome(double grossIncome) {
+<span class="fc bfc" id="L342" title="All 2 branches covered.">		if (grossIncome &lt; 0) {</span>
+			// Do nothing.
+
+<span class="pc bpc" id="L345" title="1 of 2 branches missed.">		} else if (grossIncome == 0.0) // NOTE: It is a very bad idea to check</span>
+										// for exact equality when using
+										// floating point numbers. However, this
+										// is being done to aid in the
+										// understanding of the code coverage
+										// tool. DO NOT REPEAT THIS IN MSOE CODE
+										// FOR OTHER CLASSES.
+		{
+<span class="nc" id="L353">			this.grossIncome = 0.0;</span>
+<span class="nc" id="L354">		} else {</span>
+<span class="fc" id="L355">			this.grossIncome = grossIncome;</span>
+		}
+<span class="fc" id="L357">	}</span>
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see TaxCalculatorInterface#getTaxDue()
+	 */
+	public double getTaxDue() {
+<span class="fc" id="L365">		double taxRate[] = { .1, .15, .25, .28, .33, .35 };</span>
+<span class="fc" id="L366">		double taxTable[] = { 0, 8025, 32550, 78850, 164550, 357700, 0, 11450,</span>
+<span class="fc" id="L367">				43650, 112650, 182400, 357700, 0, 16050, 65100, 131450, 200300,</span>
+<span class="fc" id="L368">				357700, 0, 8025, 32550, 65725, 100150, 178850, 0, 16050, 65100,</span>
+<span class="fc" id="L369">				131450, 200300, 357700 };</span>
+
+		int startingOffset;
+
+<span class="pc bpc" id="L373" title="2 of 6 branches missed.">		switch (this.filingStatus) {</span>
+		case SINGLE:
+<span class="fc" id="L375">			startingOffset = 0;</span>
+<span class="fc" id="L376">			break;</span>
+		case HEAD_OF_HOUSEHOLD:
+<span class="fc" id="L378">			startingOffset = 6;</span>
+<span class="fc" id="L379">			break;</span>
+		case MARRIED_FILING_JOINTLY:
+<span class="fc" id="L381">			startingOffset = 12;</span>
+<span class="fc" id="L382">			break;</span>
+		case QUALIFYING_WIDOWER:
+<span class="nc" id="L384">			startingOffset = 24;</span>
+<span class="nc" id="L385">			break;</span>
+		case MARRIED_FILING_SEPARATELY:
+<span class="fc" id="L387">			startingOffset = 18;</span>
+<span class="fc" id="L388">			break;</span>
+		default:
+<span class="nc" id="L390">			startingOffset = 0;</span>
+		}
+
+<span class="fc" id="L393">		int index = 5;</span>
+<span class="fc" id="L394">		double remainingTaxableSalary = this.getTaxableIncome();</span>
+<span class="fc" id="L395">		double totalTax = 0.00;</span>
+
+<span class="fc bfc" id="L397" title="All 2 branches covered.">		while (index &gt;= 0) {</span>
+<span class="fc bfc" id="L398" title="All 2 branches covered.">			if (remainingTaxableSalary &gt; taxTable[startingOffset + index]) {</span>
+<span class="fc" id="L399">				totalTax += (remainingTaxableSalary - taxTable[startingOffset</span>
+<span class="fc" id="L400">						+ index])</span>
+<span class="fc" id="L401">						* taxRate[index];</span>
+<span class="fc" id="L402">				remainingTaxableSalary = taxTable[startingOffset + index];</span>
+			}
+<span class="fc" id="L404">			index--;</span>
+		}
+
+<span class="fc" id="L407">		return totalTax;</span>
+	}
+
+	@Override
+	public double getNetTaxRate() {
+<span class="pc bpc" id="L412" title="1 of 2 branches missed.">		if (this.getGrossIncome() != 0) {</span>
+<span class="fc" id="L413">			return 100.0 * this.getTaxDue() / this.getGrossIncome();</span>
+		} else {
+<span class="nc" id="L415">			return 0.0;</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>TaxCalculatorTest (Mar 25, 2015 11:30:47 PM)</div></body></html>
