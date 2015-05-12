@@ -1,7 +1,14 @@
 Line number	Equivelancy
-44			0
+44			1
 63			0
-
+95			1
+118			0
+156			0
+156			0
+260			0
+263			0
+263			0
+263			0
 321			0
 323			changed boundary: 0 ; replaced sub with add: 0
 325			changed boundary: 1 ; replaced sub with add: 0 ; negated conditional: 0
