@@ -26,8 +26,8 @@ Line number : Equivalence	 Description <--RESOLUTION
 325:0	replaced double sub with add	<--SQUASHED w/testTaxableIncomeBounds()
 326:1	changed conditional boundary
 328:0	replaced double sub with add	<--SQUASHED w/testTaxableIncomeBounds()
-329:1	changed conditional boundary
-329:0	negated conditional				<--SQUASHED w/testTaxableIncomeBounds()
+329:0	changed conditional boundary	<--SQUASHED w/testTaxableIncomeBounds()
+329:1	negated conditional				
 -------setGrossIncome
 346:0	changed conditional boundary	<--SQUASHED w/testGrossIncomeReset()
 349:1	removed conditional

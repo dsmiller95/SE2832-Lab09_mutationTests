@@ -1303,7 +1303,7 @@ public class TaxCalculatorTest extends TestCase {
 			fail("did not throw exception");
 		} catch (Exception e) {}
 	}
-	
+
 	@Test
 	/**
 	 * Tests all boundary conditions and combinations around jointly filing
