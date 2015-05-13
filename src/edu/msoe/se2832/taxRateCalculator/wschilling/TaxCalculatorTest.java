@@ -1348,8 +1348,8 @@ public class TaxCalculatorTest extends TestCase {
 		TaxCalculator tmp;
 		double stdDeduct;
 
-		for(int i = -1; i < 1; i++){
-			for(int j = -1; j < 1; j++){
+		for(int i = -1; i <= 1; i++){
+			for(int j = -1; j <= 1; j++){
 				tmp = new TaxCalculator(name, TaxCalculatorInterface.MARRIED_FILING_JOINTLY, i+ageBound, j+ageBound);
 				if(i < 0 && j < 0){
 					stdDeduct = 10900.0;

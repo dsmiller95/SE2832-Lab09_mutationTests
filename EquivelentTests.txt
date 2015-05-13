@@ -1,33 +1,33 @@
 
 Initial results: (total: 24)
-Line number	Equivalence
+Line number : Equivalence : Description
 ------Constructors
-44			1
-63			0
-95			1
-118			0
+44 :1	changed conditional boundary
+63 :0	changed conditional boundary
+95 :1	changed conditional boundary
+118:0	changed conditional boundary
 ------getStandardDeduction
-156			0
-156			0 <--SQUASHED w/testMarriedJointAgeBounds()
-158			0
-158			0 <--SQUASHED w/testMarriedJointAgeBounds()
+156:0	changed conditional boundary
+157:0	changed conditional boundary <--SQUASHED w/testMarriedJointAgeBounds()
+159:0	changed conditional boundary <--SQUASHED w/testMarriedJointAgeBounds()
+160:0	changed conditional boundary
 ------isReturnRequired
-260			0
-263			0
-263			0
-263			0
-264			0
-264			0
-264			0
+260:0	removed conditional
+263:0	changed conditional boundary
+263:0	negated conditional
+264:0	changed conditional boundary
+265:0	changed conditional boundary
+266:0	changed conditional boundary
+266:0	negated conditional
 -------getTaxableIncome
-321			0
-323			0
-323			0
-325			1
-325			0
-325			0
+323:0	replaced double sub with add
+325:0	replaced double sub with add
+326:0	changed conditional boundary
+328:1	replaced double sub with add
+329:0	changed conditional boundary
+329:0	negated conditional
 -------setGrossIncome
-342			0
-345			1
+346:0	changed conditional boundary
+349:1	removed conditional
 -------getTaxDue
-398			0
+402:0	changed conditional boundary

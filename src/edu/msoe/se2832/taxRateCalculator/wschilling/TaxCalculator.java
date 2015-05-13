@@ -153,13 +153,13 @@ public class TaxCalculator implements TaxCalculatorInterface {
 			// well.
 			if ((age >= 65) && (this.spouseAge >= 65)) {
 				baseStandardDeduction += 2100;
-			} else if ((age < 65) && (this.spouseAge >= 65)) {
+			} else if ((age < 65) && 
+					(this.spouseAge >= 65)) {
 				baseStandardDeduction += 1050;
-			} else if ((age >= 65) && (this.spouseAge < 65)) {
+			} else if ((age >= 65) && 
+					(this.spouseAge < 65)) {
 				baseStandardDeduction += 1050;
-			} else {
-				// Add nothing extra.
-			}
+			} else {/* Add nothing extra.*/}
 			break;
 		case QUALIFYING_WIDOWER:
 			baseStandardDeduction = 10900;
@@ -260,8 +260,10 @@ public class TaxCalculator implements TaxCalculatorInterface {
 		if (this.filingStatus == TaxCalculatorInterface.MARRIED_FILING_JOINTLY) {
 			if ((age >= 65) && (spouseAge >= 65)) {
 				currentThreshold = 20000;
-			} else if (((age < 65) && (spouseAge >= 65))
-					|| ((age >= 65) && (spouseAge < 65))) {
+			} else if (((age < 65)	&&
+					(spouseAge >= 65))	||
+					((age >= 65) && 
+					(spouseAge < 65))) {
 				currentThreshold = 18950;
 			} else {
 				currentThreshold = 17900;
@@ -320,9 +322,11 @@ public class TaxCalculator implements TaxCalculatorInterface {
 		double retVal;
 		retVal = this.grossIncome - this.getStandardDeduction();
 
-		if (this.grossIncome - this.getStandardDeduction() > 0) {
+		if (this.grossIncome - this.getStandardDeduction()
+				> 0) {
 			retVal = this.grossIncome - this.getStandardDeduction();
-		} else if (this.grossIncome - this.getStandardDeduction() < 0) {
+		} else if (this.grossIncome - this.getStandardDeduction()
+				< 0) {
 			retVal = 0.0;
 		} else if (this.grossIncome - this.getStandardDeduction() == 0) {
 			retVal = 0.0;
