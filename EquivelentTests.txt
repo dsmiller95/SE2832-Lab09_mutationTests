@@ -1,3 +1,5 @@
+
+Initial results:
 Line number	Equivelancy
 44			1
 63			0
@@ -9,6 +11,9 @@ Line number	Equivelancy
 263			0
 263			0
 263			0
+264			0
+264			0
+264			0
 321			0
 323			changed boundary: 0 ; replaced sub with add: 0
 325			changed boundary: 1 ; replaced sub with add: 0 ; negated conditional: 0
