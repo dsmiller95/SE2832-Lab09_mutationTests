@@ -1305,6 +1305,11 @@ public class TaxCalculatorTest extends TestCase {
 	}
 	
 	@Test
+	/**
+	 * Tests all boundary conditions and combinations around jointly filing
+	 * couples' ages
+	 * @throws Exception
+	 */
 	public void testMarriedJointAgeBounds() throws Exception{
 		int ageBound = 65;
 		String name = "Bob smith";
@@ -1331,6 +1336,11 @@ public class TaxCalculatorTest extends TestCase {
 	}
 	
 	@Test
+	/**
+	 * Tests to be sure that the absolute value logic in getTaxableIncome()
+	 * operates properly
+	 * @throws Exception
+	 */
 	public void testTaxableIncomeBounds() throws Exception{
 		double stdDeduct = 5450;
 		TaxCalculator tmp = new TaxCalculator("Bob Marley", TaxCalculatorInterface.SINGLE, 42);
@@ -1342,5 +1352,21 @@ public class TaxCalculatorTest extends TestCase {
 				assertEquals((double)i, tmp.getTaxableIncome());
 			}
 		}
+	}
+	
+	@Test
+	/**
+	 * Tests to make sure the gross income is reset to 0 only if 0 is passed,
+	 * not if a negative number is passed
+	 * @throws Exception
+	 */
+	public void testGrossIncomeReset() throws Exception{
+		TaxCalculator tmp = new TaxCalculator("Bob Marley", TaxCalculatorInterface.SINGLE, 42);
+		tmp.setGrossIncome(100.0);
+		assertEquals(100.0, tmp.getGrossIncome());
+		tmp.setGrossIncome(-1);
+		assertEquals(100.0, tmp.getGrossIncome());
+		tmp.setGrossIncome(0);
+		assertEquals(0.0, tmp.getGrossIncome());
 	}
 }
