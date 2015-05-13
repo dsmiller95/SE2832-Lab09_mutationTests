@@ -1,10 +1,12 @@
 
 Initial results: (total: 24)
-Line number : Equivalence : Description
+
+------------------------------------------------------------------------------------
+Line number : Equivalence	 Description <--RESOLUTION
 ------Constructors
-44 :1	changed conditional boundary
+44 :0	changed conditional boundary	<--STUBBORN Will still throw exception, but with slightly different error message
 63 :0	changed conditional boundary	<--SQUASHED w/testSingleAgeZero()
-95 :1	changed conditional boundary
+95 :0	changed conditional boundary	<--STUBBORN Will still throw exception, but with slightly different error message
 118:0	changed conditional boundary	<--SQUASHED w/testSpouseAgeZero()
 ------getStandardDeduction
 156:1	changed conditional boundary
@@ -31,3 +33,14 @@ Line number : Equivalence : Description
 349:1	removed conditional
 -------getTaxDue
 402:1	changed conditional boundary
+------------------------------------------------------------------------------------
+
+
+Total mutants			114
+Equivalent mutants		9
+
+Initial killed mutants	90
+Initial mutation score	85.7%
+
+Final killed mutants	103
+Final mutation score	98.1%
