@@ -1342,6 +1342,28 @@ public class TaxCalculatorTest extends TestCase {
 	}
 	
 	@Test
+	public void testMarriedJointAgeBounds() throws Exception{
+		int ageBound = 65;
+		String name = "Bob smith";
+		TaxCalculator tmp;
+		double stdDeduct;
+
+		for(int i = -1; i < 1; i++){
+			for(int j = -1; j < 1; j++){
+				tmp = new TaxCalculator(name, TaxCalculatorInterface.MARRIED_FILING_JOINTLY, i+ageBound, j+ageBound);
+				if(i < 0 && j < 0){
+					stdDeduct = 10900.0;
+				}else if(i < 0 || j < 0){
+					stdDeduct = 11950.0;
+				}else{
+					stdDeduct = 13000.0;
+				}
+				assertEquals(stdDeduct, tmp.getStandardDeduction());
+			}
+		}
+	}
+	
+	@Test
 	/**
 	 * Method tests get and setName
 	 */

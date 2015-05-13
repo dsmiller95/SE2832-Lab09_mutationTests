@@ -1,12 +1,17 @@
 
-Initial results:
-Line number	Equivelancy
+Initial results: (total: 24)
+Line number	Equivalence
+------Constructors
 44			1
 63			0
 95			1
 118			0
+------getStandardDeduction
 156			0
-156			0
+156			0 <--SQUASHED w/testMarriedJointAgeBounds()
+158			0
+158			0 <--SQUASHED w/testMarriedJointAgeBounds()
+------isReturnRequired
 260			0
 263			0
 263			0
@@ -14,9 +19,15 @@ Line number	Equivelancy
 264			0
 264			0
 264			0
+-------getTaxableIncome
 321			0
-323			changed boundary: 0 ; replaced sub with add: 0
-325			changed boundary: 1 ; replaced sub with add: 0 ; negated conditional: 0
+323			0
+323			0
+325			1
+325			0
+325			0
+-------setGrossIncome
 342			0
 345			1
+-------getTaxDue
 398			0
