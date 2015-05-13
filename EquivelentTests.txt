@@ -20,12 +20,12 @@ Line number : Equivalence : Description
 266:1	changed conditional boundary
 266:0	negated conditional				<--SQUASHED w/testMarriedJointAgeBounds()
 -------getTaxableIncome
-323:0	replaced double sub with add
-325:0	replaced double sub with add
-326:0	changed conditional boundary
-328:1	replaced double sub with add
-329:0	changed conditional boundary
-329:0	negated conditional
+323:1	replaced double sub with add
+325:0	replaced double sub with add	<--SQUASHED w/testTaxableIncomeBounds()
+326:1	changed conditional boundary
+328:0	replaced double sub with add	<--SQUASHED w/testTaxableIncomeBounds()
+329:1	changed conditional boundary
+329:0	negated conditional				<--SQUASHED w/testTaxableIncomeBounds()
 -------setGrossIncome
 346:0	changed conditional boundary
 349:1	removed conditional

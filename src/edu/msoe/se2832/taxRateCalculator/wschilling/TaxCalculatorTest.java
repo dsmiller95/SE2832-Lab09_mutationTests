@@ -1329,4 +1329,18 @@ public class TaxCalculatorTest extends TestCase {
 			}
 		}
 	}
+	
+	@Test
+	public void testTaxableIncomeBounds() throws Exception{
+		double stdDeduct = 5450;
+		TaxCalculator tmp = new TaxCalculator("Bob Marley", TaxCalculatorInterface.SINGLE, 42);
+		for(int i = -3; i <= 3; i++){
+			tmp.setGrossIncome(stdDeduct + i);
+			if(i <= 0){
+				assertEquals(0.0, tmp.getTaxableIncome());
+			}else{
+				assertEquals((double)i, tmp.getTaxableIncome());
+			}
+		}
+	}
 }
