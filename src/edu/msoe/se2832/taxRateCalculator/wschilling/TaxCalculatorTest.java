@@ -1311,37 +1311,6 @@ public class TaxCalculatorTest extends TestCase {
 	}
 	
 	@Test
-	/**
-	 * Method tests 65 year old with younger spouse
-	 */
-	public void test65YoungerSpouse() throws Exception {
-		TaxCalculator tax = new TaxCalculator("John Smith",
-				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 66, 40);
-		assertEquals(11950.0, tax.getStandardDeduction());
-	}
-	
-	@Test
-	/**
-	 * Method tests younger individual with over 65 spouse
-	 */
-	public void test65OlderSpouse() throws Exception {
-		TaxCalculator tax = new TaxCalculator("John Smith",
-				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 66);
-		assertEquals(11950.0, tax.getStandardDeduction());
-	}
-	
-	@Test
-	/**
-	 * Method tests get and setName
-	 */
-	public void testSeparateUnder65() throws Exception {
-		TaxCalculator tax = new TaxCalculator("John Smith",
-				TaxCalculatorInterface.MARRIED_FILING_SEPARATELY, 40, 40);
-		tax.setGrossIncome(40000);
-		assertEquals(true, tax.isReturnRequired());
-	}
-	
-	@Test
 	public void testMarriedJointAgeBounds() throws Exception{
 		int ageBound = 65;
 		String name = "Bob smith";
@@ -1365,16 +1334,5 @@ public class TaxCalculatorTest extends TestCase {
 				assertEquals(false, tmp.isReturnRequired());
 			}
 		}
-	}
-	
-	@Test
-	/**
-	 * Method tests get and setName
-	 */
-	public void testSeparateOneUnder65() throws Exception {
-		TaxCalculator tax = new TaxCalculator("John Smith",
-				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 66, 40);
-		tax.setGrossIncome(40000);
-		assertEquals(true, tax.isReturnRequired());
 	}
 }
