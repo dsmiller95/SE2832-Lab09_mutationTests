@@ -7,18 +7,18 @@ Line number : Equivalence : Description
 95 :1	changed conditional boundary
 118:0	changed conditional boundary
 ------getStandardDeduction
-156:0	changed conditional boundary
-157:0	changed conditional boundary <--SQUASHED w/testMarriedJointAgeBounds()
-159:0	changed conditional boundary <--SQUASHED w/testMarriedJointAgeBounds()
-160:0	changed conditional boundary
+156:1	changed conditional boundary
+157:0	changed conditional boundary	<--SQUASHED w/testMarriedJointAgeBounds()
+159:0	changed conditional boundary	<--SQUASHED w/testMarriedJointAgeBounds()
+160:1	changed conditional boundary
 ------isReturnRequired
-260:0	removed conditional
-263:0	changed conditional boundary
-263:0	negated conditional
-264:0	changed conditional boundary
-265:0	changed conditional boundary
-266:0	changed conditional boundary
-266:0	negated conditional
+260:0	removed conditional				<--SQUASHED w/testMarriedJointAgeBounds()
+263:1	changed conditional boundary
+263:0	negated conditional				<--SQUASHED w/testMarriedJointAgeBounds()
+264:0	changed conditional boundary	<--SQUASHED w/testMarriedJointAgeBounds()
+265:0	changed conditional boundary	<--SQUASHED w/testMarriedJointAgeBounds()
+266:1	changed conditional boundary
+266:0	negated conditional				<--SQUASHED w/testMarriedJointAgeBounds()
 -------getTaxableIncome
 323:0	replaced double sub with add
 325:0	replaced double sub with add

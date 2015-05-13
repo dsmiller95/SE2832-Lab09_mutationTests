@@ -1353,12 +1353,16 @@ public class TaxCalculatorTest extends TestCase {
 				tmp = new TaxCalculator(name, TaxCalculatorInterface.MARRIED_FILING_JOINTLY, i+ageBound, j+ageBound);
 				if(i < 0 && j < 0){
 					stdDeduct = 10900.0;
+					tmp.setGrossIncome(17900.0 - 1.0);
 				}else if(i < 0 || j < 0){
 					stdDeduct = 11950.0;
+					tmp.setGrossIncome(18950.0 - 1.0);
 				}else{
 					stdDeduct = 13000.0;
+					tmp.setGrossIncome(20000.0 - 1.0);
 				}
 				assertEquals(stdDeduct, tmp.getStandardDeduction());
+				assertEquals(false, tmp.isReturnRequired());
 			}
 		}
 	}
