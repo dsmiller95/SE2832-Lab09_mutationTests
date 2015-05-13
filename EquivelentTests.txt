@@ -3,9 +3,9 @@ Initial results: (total: 24)
 Line number : Equivalence : Description
 ------Constructors
 44 :1	changed conditional boundary
-63 :0	changed conditional boundary
+63 :0	changed conditional boundary	<--SQUASHED w/testSingleAgeZero()
 95 :1	changed conditional boundary
-118:0	changed conditional boundary
+118:0	changed conditional boundary	<--SQUASHED w/testSpouseAgeZero()
 ------getStandardDeduction
 156:1	changed conditional boundary
 157:0	changed conditional boundary	<--SQUASHED w/testMarriedJointAgeBounds()

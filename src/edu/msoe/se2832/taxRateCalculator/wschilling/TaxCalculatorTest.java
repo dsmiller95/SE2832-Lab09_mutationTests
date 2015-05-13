@@ -1284,7 +1284,7 @@ public class TaxCalculatorTest extends TestCase {
 	/**
 	 * Method tests spouse age at zero
 	 */
-	public void testAgeZero() {
+	public void testSpouseAgeZero() {
 		try {
 			TaxCalculator tax = new TaxCalculator("Bob Smith",
 					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 0);
