@@ -1231,83 +1231,60 @@ public class TaxCalculatorTest extends TestCase {
 		tax.setName("Bob Smith");
 		assertEquals("Bob Smith", tax.getName());
 	}
+	
 
-	@Test(expected=Exception.class)
+	@Test(expected = Exception.class)
 	/**
 	 * Method tests empty name
 	 */
-	public void testEmptyName(){
-		try {
-			TaxCalculator tax = new TaxCalculator("",
-					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 40);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testEmptyName() throws Exception {
+		TaxCalculator tax = new TaxCalculator("",
+				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 40);
 	}
-	
-	@Test(expected=Exception.class)
+
+	@Test(expected = Exception.class)
 	/**
-	 * Method tests no last name
+	 * Method tests no first name
 	 */
-	public void testOnlyFirstName(){
-		try {
-			TaxCalculator tax = new TaxCalculator("Bob",
-					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 40);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testOnlyFirstName() throws Exception {
+		TaxCalculator tax = new TaxCalculator("Bob",
+				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 40);
 	}
-	
-	@Test(expected=Exception.class)
+
+	@Test(expected = Exception.class)
 	/**
-	 * Method tests no last name
+	 * Method tests spouse age at zero
 	 */
-	public void testSpouseAgeZero(){
-		try {
-			TaxCalculator tax = new TaxCalculator("Bob Smith",
-					TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testSpouseAgeZero() throws Exception {
+		TaxCalculator tax = new TaxCalculator("Bob Smith",
+				TaxCalculatorInterface.MARRIED_FILING_JOINTLY, 40, 0);
 	}
-	
-	@Test(expected=Exception.class)
+
+	@Test(expected = Exception.class)
 	/**
 	 * Method tests empty name
 	 */
-	public void testSingleEmptyName(){
-		try {
-			TaxCalculator tax = new TaxCalculator("",
-					TaxCalculatorInterface.SINGLE, 40);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testSingleEmptyName() throws Exception {
+		TaxCalculator tax = new TaxCalculator("",
+				TaxCalculatorInterface.SINGLE, 40);
 	}
-	
-	@Test(expected=Exception.class)
+
+	@Test(expected = Exception.class)
 	/**
 	 * Method tests no last name
 	 */
-	public void testSingleOnlyFirstName(){
-		try {
-			TaxCalculator tax = new TaxCalculator("Bob",
-					TaxCalculatorInterface.SINGLE, 40);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testSingleOnlyFirstName() throws Exception {
+		TaxCalculator tax = new TaxCalculator("Bob",
+				TaxCalculatorInterface.SINGLE, 40);
 	}
-	
-	@Test(expected=Exception.class)
+
+	@Test(expected = Exception.class)
 	/**
-	 * Method tests no last name
+	 * Method tests an age of zero
 	 */
-	public void testSingleAgeZero(){
-		try {
-			TaxCalculator tax = new TaxCalculator("Bob Smith",
-					TaxCalculatorInterface.SINGLE, 0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testSingleAgeZero() throws Exception {
+		TaxCalculator tax = new TaxCalculator("Bob Smith",
+				TaxCalculatorInterface.SINGLE, 0);
 	}
 	
 	@Test
