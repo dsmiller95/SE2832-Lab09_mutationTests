@@ -30,4 +30,4 @@ Line number : Equivalence : Description
 346:0	changed conditional boundary	<--SQUASHED w/testGrossIncomeReset()
 349:1	removed conditional
 -------getTaxDue
-402:0	changed conditional boundary
+402:1	changed conditional boundary
